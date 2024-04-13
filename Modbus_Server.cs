@@ -51,10 +51,10 @@ namespace Tritex_ModBus
 
         private void btnSet_Click(object sender, EventArgs e)
         {
-            if (cbRegisterType.Text == "Holding Register")
-            {
-                ModbusServer.HoldingRegisters regs = modbusServer.holdingRegisters;
-            }
+            //if (cbRegisterType.Text == "Holding Register")
+            //{
+            //    ModbusServer.HoldingRegisters regs = modbusServer.holdingRegisters;
+            //}
         }
     }
 }
