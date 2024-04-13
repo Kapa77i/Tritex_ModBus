@@ -11,9 +11,7 @@ using EasyModbus;
 
 namespace Tritex_ModBus
 {
-  
-
-    public partial class Tritex_Modbus : Form
+      public partial class Tritex_Modbus : Form
     {
         ModbusServer modbusServer;
 
@@ -21,7 +19,14 @@ namespace Tritex_ModBus
         {
             InitializeComponent();
             modbusServer = new ModbusServer();
+            //modbusServer.LocalIPAddress = double.Parse("127.0.0.1");
+
+            //Show the second form (client)
+            Modbus_Client client = new Modbus_Client();
+            client.Show();
+
         }
+
 
         private void btnStart_Click(object sender, EventArgs e)
         {
