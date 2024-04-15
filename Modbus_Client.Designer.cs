@@ -30,7 +30,6 @@
         {
             this.lbIP = new System.Windows.Forms.Label();
             this.lbPort = new System.Windows.Forms.Label();
-            this.tbIP = new System.Windows.Forms.TextBox();
             this.tbPort = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.lbClientStatus = new System.Windows.Forms.Label();
@@ -59,18 +58,6 @@
             this.lbPort.Size = new System.Drawing.Size(26, 13);
             this.lbPort.TabIndex = 1;
             this.lbPort.Text = "Port";
-            // 
-            // tbIP
-            // 
-            this.tbIP.Enabled = false;
-            this.tbIP.Location = new System.Drawing.Point(116, 383);
-            this.tbIP.Multiline = true;
-            this.tbIP.Name = "tbIP";
-            this.tbIP.Size = new System.Drawing.Size(100, 20);
-            this.tbIP.TabIndex = 2;
-            this.tbIP.Text = "192.168.0.1";
-            this.tbIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbIP.Visible = false;
             // 
             // tbPort
             // 
@@ -164,7 +151,6 @@
             this.Controls.Add(this.lbClientStatus);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.tbPort);
-            this.Controls.Add(this.tbIP);
             this.Controls.Add(this.lbPort);
             this.Controls.Add(this.lbIP);
             this.Name = "Modbus_Client";
@@ -179,7 +165,6 @@
 
         private System.Windows.Forms.Label lbIP;
         private System.Windows.Forms.Label lbPort;
-        private System.Windows.Forms.TextBox tbIP;
         private System.Windows.Forms.TextBox tbPort;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Label lbClientStatus;
