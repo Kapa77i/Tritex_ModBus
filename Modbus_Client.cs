@@ -27,9 +27,9 @@ namespace Tritex_ModBus
         private void btnConnect_Click(object sender, EventArgs e)
         {
             modbusClient = new ModbusTcpClient();
-            //modbusClient.IPAddress = tbIP.Text;
-            //modbusClient.IPAddress = cbEngines.Text;
-            //modbusClient.IPAddress = "192.168.0.254";   //Tritex IP?
+
+            //new IPEndPoint(IPAddress.Parse(cbEngines.Text), 502);
+            //new IPEndPoint(IPAddress.Parse("192.168.0.254"), 502); //Tritex IP?
             //Console.WriteLine(cbEngines.Text);
             new IPEndPoint(IPAddress.Parse("127.0.0.1"), 502);
 
