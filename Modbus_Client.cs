@@ -8,8 +8,9 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using EasyModbus;
 using FluentModbus;
+
+// https://apollo3zehn.github.io/FluentModbus/
 
 namespace Tritex_ModBus
 {
