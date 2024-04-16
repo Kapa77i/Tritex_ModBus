@@ -4,16 +4,19 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EasyModbus;
+//using EasyModbus;
+using FluentModbus;
 
 namespace Tritex_ModBus
 {
     public partial class Modbus_Client : Form
     {
-        ModbusClient modbusClient;
+        //ModbusClient modbusClient;
+        ModbusTcpClient modbusClient;
 
         public Modbus_Client()
         {
@@ -23,22 +26,19 @@ namespace Tritex_ModBus
         //Connection button functionality
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            modbusClient = new ModbusClient();
+            modbusClient = new ModbusTcpClient();
             //modbusClient.IPAddress = tbIP.Text;
             //modbusClient.IPAddress = cbEngines.Text;
             //modbusClient.IPAddress = "192.168.0.254";   //Tritex IP?
             //Console.WriteLine(cbEngines.Text);
-            modbusClient.IPAddress = "127.0.0.1";
-            modbusClient.Port = int.Parse(tbPort.Text);
-            Console.WriteLine(modbusClient.IPAddress);
-            Console.WriteLine(modbusClient.Port);
+            new IPEndPoint(IPAddress.Parse("127.0.0.1"), 502);
+
 
             if (btnConnect.Text ==  "Connect")
             {
                 try
                 {
-                    modbusClient.Available(500);
-                    modbusClient.Connect();
+                    modbusClient.Connect(ModbusEndianness.BigEndian);
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
                     btnConnect.BackColor = Color.Red;
@@ -79,11 +79,15 @@ namespace Tritex_ModBus
         private void btnJogPlus_Click(object sender, EventArgs e)
         {
             //Addressess
-            UInt16 ADD_IEG_MOTION = 4317;  //0x10DD
-            UInt16 ADD_JOG = 6020; //0x1784
-            UInt16 ADD_FASTVEL = 6024;  // 0x1788, UVEL32
-            UInt16 ADD_SLOWVELO = 6022; // 0x1786, UVEL32
-            UInt16 ADD_ACCELERATION = 6026; // 0x178A, UACC32
+            var ADD_IEG_MOTION = 4317;  //0x10DD
+            var ADD_JOG = 6020; //0x1784
+            var ADD_FASTVEL = 6024;  // 0x1788, UVEL32
+            var ADD_SLOWVELO = 6022; // 0x1786, UVEL32
+            var ADD_ACCELERATION = 6026; // 0x178A, UACC32
+
+            //Identifier
+            var IEG_MOTION_ID = 0x10DD;
+            short ADD_JOG_ID = 0x1784;
 
             //Default values to be used:
             int VAL_JOG = 65533; //# Max int value 65535. -1 if Alternate mode (AMO), -2 if default mode is on (DMO)
@@ -93,10 +97,11 @@ namespace Tritex_ModBus
 
             try
             {
-                modbusClient.WriteSingleRegister(ADD_JOG, VAL_JOG);
-                modbusClient.WriteSingleRegister(ADD_FASTVEL, VAL_FASTVEL);
-                modbusClient.WriteSingleRegister(ADD_SLOWVELO, VAL_SLOWVEL);
-                modbusClient.WriteSingleRegister(ADD_ACCELERATION, VAL_ACCELERATION);
+                modbusClient.WriteSingleRegister(ADD_JOG, VAL_JOG, ADD_JOG_ID);
+
+               // modbusClient.WriteSingleRegister(ADD_FASTVEL, VAL_FASTVEL);
+                //modbusClient.WriteSingleRegister(ADD_SLOWVELO, VAL_SLOWVEL);
+                //modbusClient.WriteSingleRegister(ADD_ACCELERATION, VAL_ACCELERATION);
             }
             catch (Exception ex)
             {

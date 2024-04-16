@@ -8,17 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EasyModbus;
+using FluentModbus;
 
 namespace Tritex_ModBus
 {
       public partial class Tritex_Modbus : Form
     {
-        ModbusServer modbusServer;
+        ModbusTcpServer modbusServer;
 
         public Tritex_Modbus()
         {
             InitializeComponent();
-            modbusServer = new ModbusServer();
+            modbusServer = new ModbusTcpServer();
             //modbusServer.LocalIPAddress = double.Parse("127.0.0.1");
 
             //Show the second form (client)
@@ -33,7 +34,7 @@ namespace Tritex_ModBus
             if (btnStart.Text == "Start")
             {
                
-                modbusServer.Listen();
+                modbusServer.Start();
                 lbStatus.Text = "Status of the Connection: Connected!";
                 btnStart.Text = "Stop";
                 btnStart.BackColor = Color.Red;
@@ -41,7 +42,7 @@ namespace Tritex_ModBus
             else if (btnStart.Text == "Stop")
             {
                 //modbusServer = new ModbusServer();
-                modbusServer.StopListening();
+                modbusServer.Dispose();
                 modbusServer = null;
                 lbStatus.Text = "Status of the Connection: Connection lost!";
                 btnStart.Text = "Start";
