@@ -29,16 +29,15 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.btnStart = new System.Windows.Forms.Button();
             this.lbStatus = new System.Windows.Forms.Label();
             this.tabcHolding = new System.Windows.Forms.TabControl();
             this.tabpHolding = new System.Windows.Forms.TabPage();
-            this.tabpDigital = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.Address = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.alias = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabpDigital = new System.Windows.Forms.TabPage();
             this.tabcHolding.SuspendLayout();
             this.tabpHolding.SuspendLayout();
             this.SuspendLayout();
@@ -87,16 +86,6 @@
             this.tabpHolding.Text = "Holding Registers";
             this.tabpHolding.UseVisualStyleBackColor = true;
             // 
-            // tabpDigital
-            // 
-            this.tabpDigital.Location = new System.Drawing.Point(4, 22);
-            this.tabpDigital.Name = "tabpDigital";
-            this.tabpDigital.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpDigital.Size = new System.Drawing.Size(452, 239);
-            this.tabpDigital.TabIndex = 1;
-            this.tabpDigital.Text = "Digital Inputs";
-            this.tabpDigital.UseVisualStyleBackColor = true;
-            // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -108,13 +97,21 @@
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1});
             this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
             this.listView1.Location = new System.Drawing.Point(0, 39);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(456, 204);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // tabpDigital
+            // 
+            this.tabpDigital.Location = new System.Drawing.Point(4, 22);
+            this.tabpDigital.Name = "tabpDigital";
+            this.tabpDigital.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpDigital.Size = new System.Drawing.Size(452, 239);
+            this.tabpDigital.TabIndex = 1;
+            this.tabpDigital.Text = "Digital Inputs";
+            this.tabpDigital.UseVisualStyleBackColor = true;
             // 
             // Tritex_Modbus
             // 

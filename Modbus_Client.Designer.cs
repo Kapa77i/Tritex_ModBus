@@ -38,7 +38,14 @@
             this.btnJobMinus = new System.Windows.Forms.Button();
             this.btnGoHome = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tbRegisterVal = new System.Windows.Forms.TextBox();
+            this.btnReadRegister = new System.Windows.Forms.Button();
+            this.tbShowRegVal = new System.Windows.Forms.TextBox();
+            this.lbRegister = new System.Windows.Forms.Label();
+            this.lbRegVal = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbIP
@@ -81,9 +88,10 @@
             // 
             // lbClientStatus
             // 
+            this.lbClientStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbClientStatus.AutoSize = true;
             this.lbClientStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbClientStatus.Location = new System.Drawing.Point(12, 428);
+            this.lbClientStatus.Location = new System.Drawing.Point(12, 565);
             this.lbClientStatus.Name = "lbClientStatus";
             this.lbClientStatus.Size = new System.Drawing.Size(133, 18);
             this.lbClientStatus.TabIndex = 5;
@@ -94,7 +102,10 @@
             this.cbEngines.FormattingEnabled = true;
             this.cbEngines.Items.AddRange(new object[] {
             "192.168.0.212",
-            "192.168.0.211"});
+            "192.168.0.211",
+            "192.168.0.1",
+            "192.168.0.254",
+            "127.0.0.1"});
             this.cbEngines.Location = new System.Drawing.Point(137, 19);
             this.cbEngines.Name = "cbEngines";
             this.cbEngines.Size = new System.Drawing.Size(121, 21);
@@ -138,14 +149,69 @@
             this.panel1.Controls.Add(this.btnJogPlus);
             this.panel1.Location = new System.Drawing.Point(66, 147);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(274, 183);
+            this.panel1.Size = new System.Drawing.Size(274, 152);
             this.panel1.TabIndex = 10;
+            // 
+            // tbRegisterVal
+            // 
+            this.tbRegisterVal.Location = new System.Drawing.Point(100, 18);
+            this.tbRegisterVal.Name = "tbRegisterVal";
+            this.tbRegisterVal.Size = new System.Drawing.Size(137, 20);
+            this.tbRegisterVal.TabIndex = 11;
+            // 
+            // btnReadRegister
+            // 
+            this.btnReadRegister.Location = new System.Drawing.Point(100, 44);
+            this.btnReadRegister.Name = "btnReadRegister";
+            this.btnReadRegister.Size = new System.Drawing.Size(137, 23);
+            this.btnReadRegister.TabIndex = 12;
+            this.btnReadRegister.Text = "Read Register Value";
+            this.btnReadRegister.UseVisualStyleBackColor = true;
+            this.btnReadRegister.Click += new System.EventHandler(this.btnReadRegister_Click);
+            // 
+            // tbShowRegVal
+            // 
+            this.tbShowRegVal.Location = new System.Drawing.Point(125, 104);
+            this.tbShowRegVal.Name = "tbShowRegVal";
+            this.tbShowRegVal.Size = new System.Drawing.Size(82, 20);
+            this.tbShowRegVal.TabIndex = 13;
+            // 
+            // lbRegister
+            // 
+            this.lbRegister.AutoSize = true;
+            this.lbRegister.Location = new System.Drawing.Point(16, 24);
+            this.lbRegister.Name = "lbRegister";
+            this.lbRegister.Size = new System.Drawing.Size(49, 13);
+            this.lbRegister.TabIndex = 14;
+            this.lbRegister.Text = "Register:";
+            // 
+            // lbRegVal
+            // 
+            this.lbRegVal.AutoSize = true;
+            this.lbRegVal.Location = new System.Drawing.Point(70, 107);
+            this.lbRegVal.Name = "lbRegVal";
+            this.lbRegVal.Size = new System.Drawing.Size(34, 13);
+            this.lbRegVal.TabIndex = 15;
+            this.lbRegVal.Text = "Value";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lbRegVal);
+            this.panel2.Controls.Add(this.lbRegister);
+            this.panel2.Controls.Add(this.tbShowRegVal);
+            this.panel2.Controls.Add(this.btnReadRegister);
+            this.panel2.Controls.Add(this.tbRegisterVal);
+            this.panel2.Location = new System.Drawing.Point(30, 322);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(286, 141);
+            this.panel2.TabIndex = 16;
             // 
             // Modbus_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 450);
+            this.ClientSize = new System.Drawing.Size(444, 592);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cbEngines);
             this.Controls.Add(this.lbClientStatus);
@@ -156,6 +222,8 @@
             this.Name = "Modbus_Client";
             this.Text = "Modbus_Client";
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,5 +241,11 @@
         private System.Windows.Forms.Button btnJobMinus;
         private System.Windows.Forms.Button btnGoHome;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox tbRegisterVal;
+        private System.Windows.Forms.Button btnReadRegister;
+        private System.Windows.Forms.TextBox tbShowRegVal;
+        private System.Windows.Forms.Label lbRegister;
+        private System.Windows.Forms.Label lbRegVal;
+        private System.Windows.Forms.Panel panel2;
     }
 }

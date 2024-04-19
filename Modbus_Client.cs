@@ -18,11 +18,12 @@ namespace Tritex_ModBus
     public partial class Modbus_Client : Form
     {
         EasyModbus.ModbusClient modbusClient;
-        //ModbusTcpClient modbusClient;
+        //ModbusTcpClient modbusTcpClient;
 
         public Modbus_Client()
         {
             InitializeComponent();
+        
         }
 
         //Connection button functionality
@@ -77,16 +78,11 @@ namespace Tritex_ModBus
             //}
 
             modbusClient = new EasyModbus.ModbusClient();
-            //modbusClient.IPAddress = tbIP.Text;
-            //modbusClient.IPAddress = cbEngines.Text;
-            //modbusClient.IPAddress = "192.168.0.1";
-            modbusClient.IPAddress = "192.168.0.212";   //Tritex IP?
-            //Console.WriteLine(cbEngines.Text);
-            //modbusClient.IPAddress = "127.0.0.1";
-            modbusClient.IPAddress = "127.0.0.1";
+            modbusClient.IPAddress = cbEngines.Text;
             modbusClient.Port = int.Parse(tbPort.Text);
             Console.WriteLine(modbusClient.IPAddress);
             Console.WriteLine(modbusClient.Port);
+            
             if (btnConnect.Text == "Connect")
             {
                 try
@@ -96,10 +92,12 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
                     btnConnect.BackColor = Color.Red;
+
                     //Enable jogs after succesfull connection
                     btnJogPlus.Enabled = true;
                     btnJobMinus.Enabled = true;
                     btnGoHome.Enabled = true;
+                    
                 }
                 catch (Exception ex)
                 {
@@ -160,26 +158,45 @@ namespace Tritex_ModBus
             //Addressess
             UInt16 ADD_IEG_MOTION = 4317;  //0x10DD
             UInt16 ADD_JOG = 6020; //0x1784
-            UInt16 ADD_FASTVEL = 6024;  // 0x1788, UVEL32
             UInt16 ADD_SLOWVELO = 6022; // 0x1786, UVEL32
+            UInt16 ADD_FASTVEL = 6024;  // 0x1788, UVEL32
             UInt16 ADD_ACCELERATION = 6026; // 0x178A, UACC32
+
             //Default values to be used:
             int VAL_JOG = 65533; //# Max int value 65535. -1 if Alternate mode (AMO), -2 if default mode is on (DMO)
             int VAL_FASTVEL = 8;
             int VAL_SLOWVEL = 8;
             int VAL_ACCELERATION = 8;
+
+            //int[] jog_values = { 65533,       6022,        8,          6024,         8,          6026,               8 };
+            int[] jog_values = { VAL_JOG, ADD_SLOWVELO, VAL_SLOWVEL, ADD_FASTVEL, VAL_FASTVEL, ADD_ACCELERATION, VAL_ACCELERATION };
+
+
             try
             {
-                modbusClient.WriteSingleRegister(ADD_JOG, VAL_JOG);
-                modbusClient.WriteSingleRegister(ADD_FASTVEL, VAL_FASTVEL);
-                modbusClient.WriteSingleRegister(ADD_SLOWVELO, VAL_SLOWVEL);
-                modbusClient.WriteSingleRegister(ADD_ACCELERATION, VAL_ACCELERATION);
+                modbusClient.WriteMultipleRegisters(ADD_JOG, jog_values);
+                Console.WriteLine(ADD_JOG.ToString());
+                foreach (int i in jog_values)
+                {
+                    Console.WriteLine(i.ToString());
+                }
+                //modbusClient.WriteSingleRegister(ADD_JOG, VAL_JOG);
+                //modbusClient.WriteSingleRegister(ADD_FASTVEL, VAL_FASTVEL);
+                //modbusClient.WriteSingleRegister(ADD_SLOWVELO, VAL_SLOWVEL);
+                //modbusClient.WriteSingleRegister(ADD_ACCELERATION, VAL_ACCELERATION);
             }
             catch (Exception ex)
             {
                 lbClientStatus.Text = "Error when writing! " + ex.ToString();
             }
 
+        }
+
+        private void btnReadRegister_Click(object sender, EventArgs e)
+        {
+            int[] vals;
+            vals = modbusClient.ReadHoldingRegisters(int.Parse(tbRegisterVal.Text), 1);
+            tbShowRegVal.Text = vals[0].ToString();
         }
     }
 }
