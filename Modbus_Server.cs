@@ -15,6 +15,7 @@ namespace Tritex_ModBus
     public partial class Tritex_Modbus : Form
     {
         ModbusTcpServer modbusServer;
+      
         //EasyModbus.ModbusServer modbusServer;
 
         public Tritex_Modbus()
