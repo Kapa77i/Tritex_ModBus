@@ -45,7 +45,7 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    modbusTcpClient.Connect(ModbusEndianness.BigEndian);
+                    modbusTcpClient.Connect(new IPEndPoint(IPAddress.Parse(cbEngines.Text), int.Parse(tbPort.Text)), ModbusEndianness.LittleEndian);
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
                     btnConnect.BackColor = Color.Red;
@@ -133,7 +133,8 @@ namespace Tritex_ModBus
                 {
                     Console.WriteLine(i.ToString());
                 }
-                modbusTcpClient.WriteMultipleRegisters(uniqIdent, ADD_JOG, jog_values_array);
+               // modbusTcpClient.WriteSingleRegister(uniqIdent, ADD_IEG_MOTION, );
+                modbusTcpClient.WriteMultipleRegisters(uniqIdent, ADD_IEG_MOTION, jog_values_array);
                 //modbusTcpClient.WriteMultipleRegisters<int>(uniqIdent, ADD_JOG, jog_values);
                 Console.WriteLine("Kirjoituksen jälkeen: ");
                 foreach (int i in jog_values)
@@ -166,6 +167,8 @@ namespace Tritex_ModBus
             //registers.SetBigEndian<int>(address: 1, value: 99);
             //Console.WriteLine(registers.ToString());
             //Span<short> registers.GetBigEndian<T>();
+
+            //var data = modbusTcpClient.ReadI
 
             var shortDataResult = modbusTcpClient.ReadHoldingRegisters<int>(uniqIdent, startingAddress, 1);
             Console.WriteLine("Haettu tulos: " + shortDataResult[0]);
