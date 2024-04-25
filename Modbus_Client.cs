@@ -35,6 +35,7 @@ namespace Tritex_ModBus
         {
             modbusTcpClient = new ModbusTcpClient();
             var registers = ModbusTcpServer.GetHoldingRegisters();
+            var uniqIdent = 0x00;
 
             new IPEndPoint(IPAddress.Parse(cbEngines.Text), int.Parse(tbPort.Text));
      
@@ -45,10 +46,13 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    modbusTcpClient.Connect(new IPEndPoint(IPAddress.Parse(cbEngines.Text), int.Parse(tbPort.Text)), ModbusEndianness.LittleEndian);
+                    modbusTcpClient.Connect(new IPEndPoint(IPAddress.Parse(cbEngines.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
                     btnConnect.BackColor = Color.Red;
+                    var readResult = modbusTcpClient.ReadHoldingRegisters<float>(1, 2, 3).ToArray(); // Modify the address and count as needed
+
+                    Console.WriteLine(readResult.Length);
 
                     //Enable jogs after succesfull connection
                     btnJogPlus.Enabled = true;
@@ -103,7 +107,7 @@ namespace Tritex_ModBus
             int ADD_JOG_ID = 0x1784;
 
             //Default values to be used:
-            int VAL_JOG = 65533; //# Max int value 65535. -1 if Alternate mode (AMO), -2 if default mode is on (DMO)
+            int VAL_JOG = 1; //# Max int value 65535. -1 if Alternate mode (AMO), -2 if default mode is on (DMO)
             int VAL_FASTVEL = 8;
             int VAL_FASTVELHIGH = 8;
             int VAL_SLOWVEL = 8;
@@ -119,12 +123,7 @@ namespace Tritex_ModBus
 
             //int[] jog_values_Big = { VAL_SLOWVEL, VAL_SLOWVELHIGH, VAL_FASTVEL, VAL_FASTVELHIGH, VAL_ACCELERATION, VAL_ACCELERATIONHIGH };
             //int[] jog_values_Address = { ADD_SLOWVELO, ADD_SLOWVELOHIGH, ADD_FASTVEL, ADD_FASTVELHIGH, ADD_ACCELERATION, ADD_ACCELERATIONHIGH };
-            
 
-            //foreach (int i in jog_values)
-            //{
-            //    Console.WriteLine(i.ToString());
-            //}
 
             try
             {
@@ -142,13 +141,7 @@ namespace Tritex_ModBus
                     Console.WriteLine(i.ToString());
                 }
                 Console.WriteLine("Kirjoitus onnistui!");
-
-                //int j = 0;
-                //foreach (var item in jog_values_Address)
-                //{
-                //    registers.SetBigEndian<int>(address: item, value: jog_values_Big[j]);
-                //    j++;
-                //}
+                modbusTcpClient.WriteSingleRegister(uniqIdent, ADD_JOG, (ushort)VAL_JOG);
 
             }
             catch (Exception ex)
@@ -168,8 +161,8 @@ namespace Tritex_ModBus
             //Console.WriteLine(registers.ToString());
             //Span<short> registers.GetBigEndian<T>();
 
-            //var data = modbusTcpClient.ReadI
 
+            //var data = modbusTcpClient.ReadI
             var shortDataResult = modbusTcpClient.ReadHoldingRegisters<int>(uniqIdent, startingAddress, 1);
             Console.WriteLine("Haettu tulos: " + shortDataResult[0]);
             //Console.WriteLine(shortDataResult[0]);
