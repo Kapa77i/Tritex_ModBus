@@ -64,17 +64,17 @@ namespace Tritex_ModBus
             var registers = ModbusTcpServer.GetHoldingRegisters();
             var uniqIdent = 0x00;
 
-            new IPEndPoint(IPAddress.Parse(cbEngines.Text), int.Parse(tbPort.Text));
+            //new IPEndPoint(IPAddress.Parse(cbEngines.Text), int.Parse(tbPort.Text));
      
-            Console.WriteLine(IPAddress.Parse(cbEngines.Text));
-            Console.WriteLine(int.Parse(tbPort.Text));
+           // Console.WriteLine(IPAddress.Parse(cbEngines.Text));
+            //Console.WriteLine(int.Parse(tbPort.Text));
 
             if (btnConnect.Text == "Connect")
             {
                 try
                 {
                     modbusTcpClient1.Connect(new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
-                    modbusTcpClient2.Connect(new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
+                    modbusTcpClient2.Connect(new IPEndPoint(IPAddress.Parse(tbM2.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
                     Console.WriteLine("Both engines connected");
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
@@ -126,13 +126,13 @@ namespace Tritex_ModBus
             try
             {
                 //IEG_MODE, enable
-                modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4316, 2);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2);
 
 
                 //IEG_MODE, Fault reset
-                modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4316, 65535);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
                 lbClientStatus.Text = "Write succesful!";
 
                 btnEnable.Text = "Move Enabled!";
