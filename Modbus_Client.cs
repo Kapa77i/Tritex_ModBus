@@ -28,6 +28,7 @@ namespace Tritex_ModBus
         public Modbus_Client()
         {
             InitializeComponent();
+           
         }
 
         //Connection button functionality

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             this.btnStart = new System.Windows.Forms.Button();
             this.lbStatus = new System.Windows.Forms.Label();
             this.tabcHolding = new System.Windows.Forms.TabControl();
@@ -92,10 +92,10 @@
             this.Address,
             this.Value,
             this.alias});
-            listViewGroup1.Header = "ListViewGroup";
-            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "ListViewGroup";
+            listViewGroup2.Name = "listViewGroup1";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
+            listViewGroup2});
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 39);
             this.listView1.Name = "listView1";
@@ -122,6 +122,7 @@
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.btnStart);
             this.Name = "Tritex_Modbus";
+            this.Opacity = 0D;
             this.Text = "Tritex Modbus Controller";
             this.tabcHolding.ResumeLayout(false);
             this.tabpHolding.ResumeLayout(false);
