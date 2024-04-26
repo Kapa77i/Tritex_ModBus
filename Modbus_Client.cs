@@ -164,8 +164,14 @@ namespace Tritex_ModBus
             try
             {
                 //var data = modbusTcpClient.ReadI
-                var shortDataResult = modbusTcpClient.ReadHoldingRegisters<int>(uniqIdent, startingAddress, 1);
+                var shortDataResult = modbusTcpClient.ReadHoldingRegisters<int>(uniqIdent, startingAddress, 10);
                 Console.WriteLine("Haettu tulos: " + shortDataResult[0]);
+
+                foreach (var item in shortDataResult) { 
+                
+                    Console.WriteLine(item.ToString());
+
+                }
                 //Console.WriteLine(shortDataResult[0]);
 
 
