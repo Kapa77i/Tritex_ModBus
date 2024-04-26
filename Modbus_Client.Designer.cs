@@ -46,6 +46,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnEnable = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
+            this.tbM1 = new System.Windows.Forms.TextBox();
+            this.tbM2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -101,6 +103,7 @@
             // 
             // cbEngines
             // 
+            this.cbEngines.Enabled = false;
             this.cbEngines.FormattingEnabled = true;
             this.cbEngines.Items.AddRange(new object[] {
             "192.168.0.212",
@@ -108,7 +111,7 @@
             "192.168.0.1",
             "192.168.0.254",
             "127.0.0.1"});
-            this.cbEngines.Location = new System.Drawing.Point(137, 19);
+            this.cbEngines.Location = new System.Drawing.Point(284, 55);
             this.cbEngines.Name = "cbEngines";
             this.cbEngines.Size = new System.Drawing.Size(121, 21);
             this.cbEngines.TabIndex = 6;
@@ -233,11 +236,31 @@
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
+            // tbM1
+            // 
+            this.tbM1.Enabled = false;
+            this.tbM1.Location = new System.Drawing.Point(139, 19);
+            this.tbM1.Name = "tbM1";
+            this.tbM1.Size = new System.Drawing.Size(100, 20);
+            this.tbM1.TabIndex = 17;
+            this.tbM1.Text = "192.168.0.211";
+            // 
+            // tbM2
+            // 
+            this.tbM2.Enabled = false;
+            this.tbM2.Location = new System.Drawing.Point(250, 19);
+            this.tbM2.Name = "tbM2";
+            this.tbM2.Size = new System.Drawing.Size(100, 20);
+            this.tbM2.TabIndex = 18;
+            this.tbM2.Text = "192.168.0.212";
+            // 
             // Modbus_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 592);
+            this.Controls.Add(this.tbM2);
+            this.Controls.Add(this.tbM1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cbEngines);
@@ -278,5 +301,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnEnable;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.TextBox tbM1;
+        private System.Windows.Forms.TextBox tbM2;
     }
 }

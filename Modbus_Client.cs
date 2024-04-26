@@ -43,6 +43,8 @@ namespace Tritex_ModBus
     {
         //EasyModbus.ModbusClient modbusClient;
         ModbusTcpClient modbusTcpClient;
+        ModbusTcpClient modbusTcpClient1;
+        ModbusTcpClient modbusTcpClient2;
         ModbusTcpServer ModbusTcpServer = new ModbusTcpServer();
 
         int SLAVE_ID = 1; 
@@ -57,7 +59,8 @@ namespace Tritex_ModBus
         //Connection button functionality
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            modbusTcpClient = new ModbusTcpClient();
+            modbusTcpClient1 = new ModbusTcpClient();
+            modbusTcpClient2 = new ModbusTcpClient();
             var registers = ModbusTcpServer.GetHoldingRegisters();
             var uniqIdent = 0x00;
 
@@ -70,7 +73,9 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    modbusTcpClient.Connect(new IPEndPoint(IPAddress.Parse(cbEngines.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
+                    modbusTcpClient1.Connect(new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
+                    modbusTcpClient2.Connect(new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
+                    Console.WriteLine("Both engines connected");
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
                     btnConnect.BackColor = Color.Red;
@@ -91,8 +96,10 @@ namespace Tritex_ModBus
 
                 try
                 {
-                    modbusTcpClient.Disconnect();
-                    modbusTcpClient = null;
+                    modbusTcpClient1.Disconnect();
+                    modbusTcpClient1 = null;
+                    modbusTcpClient2.Disconnect();
+                    modbusTcpClient2 = null;
                     lbClientStatus.Text = "Client Connection: Disconnected!";
                     btnConnect.Text = "Connect";
                     btnConnect.BackColor = Color.White;
@@ -118,11 +125,17 @@ namespace Tritex_ModBus
         {
             try
             {
-                btnEnable.Text = "Move Enabled!";
-                //IEG_MODE
-                modbusTcpClient.WriteSingleRegister(0x00, 4316, 2);
-                modbusTcpClient.WriteSingleRegister(0x00, 4316, 65535);
+                //IEG_MODE, enable
+                modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4316, 2);
+
+
+                //IEG_MODE, Fault reset
+                modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4316, 65535);
                 lbClientStatus.Text = "Write succesful!";
+
+                btnEnable.Text = "Move Enabled!";
 
                 //Allow the jogs
                 btnJogPlus.Enabled = true;
@@ -143,7 +156,8 @@ namespace Tritex_ModBus
             try
             {
                 //STOP movement, IEG_MOTION
-                modbusTcpClient.WriteSingleRegister(0x00, 4317, 4);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 4);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 4);
                 lbClientStatus.Text = "Write succesful!";
             }
             catch (Exception ex)
@@ -158,7 +172,8 @@ namespace Tritex_ModBus
             try
             {
                 
-                modbusTcpClient.WriteSingleRegister(0x00, 4317, 16);                
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 16);
                 lbClientStatus.Text = "Write succesful!";
 
             }
@@ -176,7 +191,8 @@ namespace Tritex_ModBus
             try
             {
 
-                modbusTcpClient.WriteSingleRegister(0x00, 4317, 32);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 32);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 32);
                 lbClientStatus.Text = "Write succesful!";
 
             }
@@ -215,7 +231,6 @@ namespace Tritex_ModBus
             }
             catch (Exception ex)
             {
-
                 lbClientStatus.Text = "Error when writing! " + ex.ToString();
             }
            
