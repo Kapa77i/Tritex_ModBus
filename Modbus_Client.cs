@@ -108,11 +108,11 @@ namespace Tritex_ModBus
 
             //Default values to be used:
             int VAL_JOG = 1; //# Max int value 65535. -1 if Alternate mode (AMO), -2 if default mode is on (DMO)
-            int VAL_FASTVEL = 8;
+            int VAL_FASTVEL = 100;
             int VAL_FASTVELHIGH = 8;
-            int VAL_SLOWVEL = 8;
+            int VAL_SLOWVEL = 100;
             int VAL_SLOWVELHIGH = 8;
-            int VAL_ACCELERATION = 8;
+            int VAL_ACCELERATION = 50;
             int VAL_ACCELERATIONHIGH = 8;
 
             ////int[] jog_values = {    6022,        8,            6023,                8         6024,         8,            6025                8              6026,               8,                    6027,                 8 };
@@ -161,14 +161,22 @@ namespace Tritex_ModBus
             //Console.WriteLine(registers.ToString());
             //Span<short> registers.GetBigEndian<T>();
 
+            try
+            {
+                //var data = modbusTcpClient.ReadI
+                var shortDataResult = modbusTcpClient.ReadHoldingRegisters<int>(uniqIdent, startingAddress, 1);
+                Console.WriteLine("Haettu tulos: " + shortDataResult[0]);
+                //Console.WriteLine(shortDataResult[0]);
 
-            //var data = modbusTcpClient.ReadI
-            var shortDataResult = modbusTcpClient.ReadHoldingRegisters<int>(uniqIdent, startingAddress, 1);
-            Console.WriteLine("Haettu tulos: " + shortDataResult[0]);
-            //Console.WriteLine(shortDataResult[0]);
 
+                tbShowRegVal.Text = shortDataResult[0].ToString();
+            }
+            catch (Exception ex)
+            {
 
-            tbShowRegVal.Text = shortDataResult[0].ToString();
+                lbClientStatus.Text = "Error when writing! " + ex.ToString();
+            }
+           
         }
 
     }
