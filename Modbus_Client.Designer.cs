@@ -44,6 +44,8 @@
             this.lbRegister = new System.Windows.Forms.Label();
             this.lbRegVal = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnEnable = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -114,7 +116,7 @@
             // btnJogPlus
             // 
             this.btnJogPlus.Enabled = false;
-            this.btnJogPlus.Location = new System.Drawing.Point(33, 26);
+            this.btnJogPlus.Location = new System.Drawing.Point(137, 25);
             this.btnJogPlus.Name = "btnJogPlus";
             this.btnJogPlus.Size = new System.Drawing.Size(98, 49);
             this.btnJogPlus.TabIndex = 7;
@@ -125,17 +127,18 @@
             // btnJobMinus
             // 
             this.btnJobMinus.Enabled = false;
-            this.btnJobMinus.Location = new System.Drawing.Point(137, 26);
+            this.btnJobMinus.Location = new System.Drawing.Point(241, 25);
             this.btnJobMinus.Name = "btnJobMinus";
             this.btnJobMinus.Size = new System.Drawing.Size(98, 49);
             this.btnJobMinus.TabIndex = 8;
             this.btnJobMinus.Text = "Jog-";
             this.btnJobMinus.UseVisualStyleBackColor = true;
+            this.btnJobMinus.Click += new System.EventHandler(this.btnJobMinus_Click);
             // 
             // btnGoHome
             // 
             this.btnGoHome.Enabled = false;
-            this.btnGoHome.Location = new System.Drawing.Point(88, 81);
+            this.btnGoHome.Location = new System.Drawing.Point(21, 90);
             this.btnGoHome.Name = "btnGoHome";
             this.btnGoHome.Size = new System.Drawing.Size(98, 49);
             this.btnGoHome.TabIndex = 9;
@@ -144,12 +147,14 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnStop);
+            this.panel1.Controls.Add(this.btnEnable);
             this.panel1.Controls.Add(this.btnGoHome);
             this.panel1.Controls.Add(this.btnJobMinus);
             this.panel1.Controls.Add(this.btnJogPlus);
-            this.panel1.Location = new System.Drawing.Point(66, 147);
+            this.panel1.Location = new System.Drawing.Point(66, 128);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(274, 152);
+            this.panel1.Size = new System.Drawing.Size(355, 188);
             this.panel1.TabIndex = 10;
             // 
             // tbRegisterVal
@@ -206,6 +211,28 @@
             this.panel2.Size = new System.Drawing.Size(286, 141);
             this.panel2.TabIndex = 16;
             // 
+            // btnEnable
+            // 
+            this.btnEnable.Enabled = false;
+            this.btnEnable.Location = new System.Drawing.Point(21, 25);
+            this.btnEnable.Name = "btnEnable";
+            this.btnEnable.Size = new System.Drawing.Size(98, 49);
+            this.btnEnable.TabIndex = 10;
+            this.btnEnable.Text = "Enable Move";
+            this.btnEnable.UseVisualStyleBackColor = true;
+            this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Enabled = false;
+            this.btnStop.Location = new System.Drawing.Point(184, 90);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(98, 49);
+            this.btnStop.TabIndex = 11;
+            this.btnStop.Text = "STOP Move";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // Modbus_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,5 +276,7 @@
         private System.Windows.Forms.Label lbRegister;
         private System.Windows.Forms.Label lbRegVal;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnEnable;
+        private System.Windows.Forms.Button btnStop;
     }
 }
