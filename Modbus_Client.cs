@@ -141,7 +141,10 @@ namespace Tritex_ModBus
                     Console.WriteLine(i.ToString());
                 }
                 Console.WriteLine("Kirjoitus onnistui!");
-                modbusTcpClient.WriteSingleRegister(uniqIdent, ADD_JOG, (ushort)VAL_JOG);
+                //modbusTcpClient.WriteSingleRegister(uniqIdent, ADD_JOG, (ushort)VAL_JOG);
+                
+                
+                lbClientStatus.Text = "Write succesful!";
 
             }
             catch (Exception ex)
@@ -164,7 +167,7 @@ namespace Tritex_ModBus
             try
             {
                 //var data = modbusTcpClient.ReadI
-                var shortDataResult = modbusTcpClient.ReadHoldingRegisters<int>(uniqIdent, startingAddress, 10);
+                var shortDataResult = modbusTcpClient.ReadHoldingRegisters<short>(uniqIdent, startingAddress, 10);
                 Console.WriteLine("Haettu tulos: " + shortDataResult[0]);
 
                 foreach (var item in shortDataResult) { 
@@ -174,6 +177,7 @@ namespace Tritex_ModBus
                 }
                 //Console.WriteLine(shortDataResult[0]);
 
+                lbClientStatus.Text = "Read succesful!";
 
                 tbShowRegVal.Text = shortDataResult[0].ToString();
             }
