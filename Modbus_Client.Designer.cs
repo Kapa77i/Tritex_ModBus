@@ -219,7 +219,9 @@
             this.Controls.Add(this.tbPort);
             this.Controls.Add(this.lbPort);
             this.Controls.Add(this.lbIP);
+            this.Location = new System.Drawing.Point(500, 500);
             this.Name = "Modbus_Client";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Modbus_Client";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
