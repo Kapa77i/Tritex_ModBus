@@ -167,9 +167,9 @@ namespace Tritex_ModBus
             try
             {
                 //var data = modbusTcpClient.ReadI
-                var shortDataResult = modbusTcpClient.ReadHoldingRegisters<short>(uniqIdent, startingAddress, 10);
-                Console.WriteLine("Haettu tulos: " + shortDataResult[0]);
+                var shortDataResult = modbusTcpClient.ReadHoldingRegisters<short>(uniqIdent, startingAddress, 2);
 
+                Console.WriteLine("Haettu tulos: ");
                 foreach (var item in shortDataResult) { 
                 
                     Console.WriteLine(item.ToString());
@@ -178,7 +178,6 @@ namespace Tritex_ModBus
                 //Console.WriteLine(shortDataResult[0]);
 
                 lbClientStatus.Text = "Read succesful!";
-
                 tbShowRegVal.Text = shortDataResult[0].ToString();
             }
             catch (Exception ex)
