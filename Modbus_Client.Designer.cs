@@ -33,23 +33,25 @@
             this.tbPort = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.lbClientStatus = new System.Windows.Forms.Label();
-            this.cbEngines = new System.Windows.Forms.ComboBox();
             this.btnJogPlus = new System.Windows.Forms.Button();
             this.btnJobMinus = new System.Windows.Forms.Button();
             this.btnGoHome = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMove1 = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnEnable = new System.Windows.Forms.Button();
             this.tbRegisterVal = new System.Windows.Forms.TextBox();
             this.btnReadRegister = new System.Windows.Forms.Button();
             this.tbShowRegVal = new System.Windows.Forms.TextBox();
             this.lbRegister = new System.Windows.Forms.Label();
             this.lbRegVal = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnEnable = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
             this.tbM1 = new System.Windows.Forms.TextBox();
             this.tbM2 = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbIP
@@ -73,16 +75,16 @@
             // tbPort
             // 
             this.tbPort.Enabled = false;
-            this.tbPort.Location = new System.Drawing.Point(139, 56);
+            this.tbPort.Location = new System.Drawing.Point(127, 56);
             this.tbPort.Name = "tbPort";
-            this.tbPort.Size = new System.Drawing.Size(119, 20);
+            this.tbPort.Size = new System.Drawing.Size(102, 20);
             this.tbPort.TabIndex = 3;
             this.tbPort.Text = "502";
             this.tbPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(143, 93);
+            this.btnConnect.Location = new System.Drawing.Point(125, 84);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(110, 29);
             this.btnConnect.TabIndex = 4;
@@ -95,31 +97,16 @@
             this.lbClientStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbClientStatus.AutoSize = true;
             this.lbClientStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbClientStatus.Location = new System.Drawing.Point(12, 508);
+            this.lbClientStatus.Location = new System.Drawing.Point(12, 522);
             this.lbClientStatus.Name = "lbClientStatus";
             this.lbClientStatus.Size = new System.Drawing.Size(133, 18);
             this.lbClientStatus.TabIndex = 5;
             this.lbClientStatus.Text = "Client Connection: ";
             // 
-            // cbEngines
-            // 
-            this.cbEngines.Enabled = false;
-            this.cbEngines.FormattingEnabled = true;
-            this.cbEngines.Items.AddRange(new object[] {
-            "192.168.0.212",
-            "192.168.0.211",
-            "192.168.0.1",
-            "192.168.0.254",
-            "127.0.0.1"});
-            this.cbEngines.Location = new System.Drawing.Point(284, 55);
-            this.cbEngines.Name = "cbEngines";
-            this.cbEngines.Size = new System.Drawing.Size(121, 21);
-            this.cbEngines.TabIndex = 6;
-            // 
             // btnJogPlus
             // 
             this.btnJogPlus.Enabled = false;
-            this.btnJogPlus.Location = new System.Drawing.Point(137, 25);
+            this.btnJogPlus.Location = new System.Drawing.Point(22, 20);
             this.btnJogPlus.Name = "btnJogPlus";
             this.btnJogPlus.Size = new System.Drawing.Size(98, 49);
             this.btnJogPlus.TabIndex = 7;
@@ -130,7 +117,7 @@
             // btnJobMinus
             // 
             this.btnJobMinus.Enabled = false;
-            this.btnJobMinus.Location = new System.Drawing.Point(241, 25);
+            this.btnJobMinus.Location = new System.Drawing.Point(126, 20);
             this.btnJobMinus.Name = "btnJobMinus";
             this.btnJobMinus.Size = new System.Drawing.Size(98, 49);
             this.btnJobMinus.TabIndex = 8;
@@ -141,7 +128,7 @@
             // btnGoHome
             // 
             this.btnGoHome.Enabled = false;
-            this.btnGoHome.Location = new System.Drawing.Point(21, 90);
+            this.btnGoHome.Location = new System.Drawing.Point(21, 130);
             this.btnGoHome.Name = "btnGoHome";
             this.btnGoHome.Size = new System.Drawing.Size(98, 49);
             this.btnGoHome.TabIndex = 9;
@@ -153,12 +140,42 @@
             this.panel1.Controls.Add(this.btnStop);
             this.panel1.Controls.Add(this.btnEnable);
             this.panel1.Controls.Add(this.btnGoHome);
-            this.panel1.Controls.Add(this.btnJobMinus);
-            this.panel1.Controls.Add(this.btnJogPlus);
-            this.panel1.Location = new System.Drawing.Point(66, 128);
+            this.panel1.Location = new System.Drawing.Point(30, 128);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(355, 188);
+            this.panel1.Size = new System.Drawing.Size(140, 204);
             this.panel1.TabIndex = 10;
+            // 
+            // btnMove1
+            // 
+            this.btnMove1.Enabled = false;
+            this.btnMove1.Location = new System.Drawing.Point(24, 85);
+            this.btnMove1.Name = "btnMove1";
+            this.btnMove1.Size = new System.Drawing.Size(98, 49);
+            this.btnMove1.TabIndex = 12;
+            this.btnMove1.Text = "Move";
+            this.btnMove1.UseVisualStyleBackColor = true;
+            // 
+            // btnStop
+            // 
+            this.btnStop.Enabled = false;
+            this.btnStop.Location = new System.Drawing.Point(21, 71);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(98, 49);
+            this.btnStop.TabIndex = 11;
+            this.btnStop.Text = "STOP Move";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnEnable
+            // 
+            this.btnEnable.Enabled = false;
+            this.btnEnable.Location = new System.Drawing.Point(21, 13);
+            this.btnEnable.Name = "btnEnable";
+            this.btnEnable.Size = new System.Drawing.Size(98, 49);
+            this.btnEnable.TabIndex = 10;
+            this.btnEnable.Text = "Enable Move";
+            this.btnEnable.UseVisualStyleBackColor = true;
+            this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
             // 
             // tbRegisterVal
             // 
@@ -209,37 +226,15 @@
             this.panel2.Controls.Add(this.tbShowRegVal);
             this.panel2.Controls.Add(this.btnReadRegister);
             this.panel2.Controls.Add(this.tbRegisterVal);
-            this.panel2.Location = new System.Drawing.Point(30, 322);
+            this.panel2.Location = new System.Drawing.Point(30, 360);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(286, 141);
             this.panel2.TabIndex = 16;
             // 
-            // btnEnable
-            // 
-            this.btnEnable.Enabled = false;
-            this.btnEnable.Location = new System.Drawing.Point(21, 25);
-            this.btnEnable.Name = "btnEnable";
-            this.btnEnable.Size = new System.Drawing.Size(98, 49);
-            this.btnEnable.TabIndex = 10;
-            this.btnEnable.Text = "Enable Move";
-            this.btnEnable.UseVisualStyleBackColor = true;
-            this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
-            // 
-            // btnStop
-            // 
-            this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(184, 90);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(98, 49);
-            this.btnStop.TabIndex = 11;
-            this.btnStop.Text = "STOP Move";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
             // tbM1
             // 
             this.tbM1.Enabled = false;
-            this.tbM1.Location = new System.Drawing.Point(139, 19);
+            this.tbM1.Location = new System.Drawing.Point(129, 19);
             this.tbM1.Name = "tbM1";
             this.tbM1.Size = new System.Drawing.Size(100, 20);
             this.tbM1.TabIndex = 17;
@@ -248,22 +243,32 @@
             // tbM2
             // 
             this.tbM2.Enabled = false;
-            this.tbM2.Location = new System.Drawing.Point(250, 19);
+            this.tbM2.Location = new System.Drawing.Point(244, 19);
             this.tbM2.Name = "tbM2";
             this.tbM2.Size = new System.Drawing.Size(100, 20);
             this.tbM2.TabIndex = 18;
             this.tbM2.Text = "192.168.0.212";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnMove1);
+            this.panel3.Controls.Add(this.btnJogPlus);
+            this.panel3.Controls.Add(this.btnJobMinus);
+            this.panel3.Location = new System.Drawing.Point(176, 128);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(263, 191);
+            this.panel3.TabIndex = 19;
+            // 
             // Modbus_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 592);
+            this.ClientSize = new System.Drawing.Size(467, 606);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.tbM2);
             this.Controls.Add(this.tbM1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.cbEngines);
             this.Controls.Add(this.lbClientStatus);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.tbPort);
@@ -276,6 +281,7 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,7 +294,6 @@
         private System.Windows.Forms.TextBox tbPort;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Label lbClientStatus;
-        private System.Windows.Forms.ComboBox cbEngines;
         private System.Windows.Forms.Button btnJogPlus;
         private System.Windows.Forms.Button btnJobMinus;
         private System.Windows.Forms.Button btnGoHome;
@@ -303,5 +308,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.TextBox tbM1;
         private System.Windows.Forms.TextBox tbM2;
+        private System.Windows.Forms.Button btnMove1;
+        private System.Windows.Forms.Panel panel3;
     }
 }
