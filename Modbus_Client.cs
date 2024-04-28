@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 
 namespace Tritex_ModBus
 {
-    ////Addressess
+    ////Addressess listing
     //int ADD_IEG_MOTION = 4317;  //0x10DD
     //int ADD_JOG = 6020; //0x1784
     //int ADD_SLOWVELO = 6022; // 0x1786, UVEL32
