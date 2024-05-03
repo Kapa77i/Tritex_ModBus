@@ -227,7 +227,7 @@ namespace Tritex_ModBus
         //MOVEMENT 
         //It uses different channel (4318) and it calls out the mapped movements in the Tritex (Move 0 - 15).
 
-        //IEG_MOVE_LEVEL = move to Move 1 parameter.
+        //IEG_MOVE_LEVEL = move to Move 2 parameter.
         private void btnMove1_Click(object sender, EventArgs e)
         {
             try
@@ -238,7 +238,24 @@ namespace Tritex_ModBus
                 lbClientStatus.Text = "IEF_MOTION_LEVEL succesful!";
                 modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
+                lbClientStatus.Text = "Write succesful to Move2!";
+            }
+            catch (Exception ex)
+            {
+
+                lbClientStatus.Text = "Error when writing! " + ex.ToString();
+            }
+        }
+        //This function terminate the Move command in IEG_LEVEL
+        private void btnMove1Terminate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //For move 2
+                modbusTcpClient1.WriteSingleRegister(0x00, 4322, 4);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4322, 4);
                 lbClientStatus.Text = "Write succesful!";
+
             }
             catch (Exception ex)
             {
@@ -266,7 +283,7 @@ namespace Tritex_ModBus
             }
         }
 
-
+       
         private void btnReadRegister_Click(object sender, EventArgs e)
         {
             var uniqIdent = 0x00;

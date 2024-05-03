@@ -49,6 +49,7 @@
             this.tbM1 = new System.Windows.Forms.TextBox();
             this.tbM2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnMove1Terminate = new System.Windows.Forms.Button();
             this.btnMove2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -274,6 +275,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnMove1Terminate);
             this.panel3.Controls.Add(this.btnMove2);
             this.panel3.Controls.Add(this.btnMove1);
             this.panel3.Controls.Add(this.btnJogPlus);
@@ -281,8 +283,20 @@
             this.panel3.Location = new System.Drawing.Point(235, 158);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(351, 235);
+            this.panel3.Size = new System.Drawing.Size(351, 269);
             this.panel3.TabIndex = 19;
+            // 
+            // btnMove1Terminate
+            // 
+            this.btnMove1Terminate.Enabled = false;
+            this.btnMove1Terminate.Location = new System.Drawing.Point(32, 185);
+            this.btnMove1Terminate.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMove1Terminate.Name = "btnMove1Terminate";
+            this.btnMove1Terminate.Size = new System.Drawing.Size(131, 60);
+            this.btnMove1Terminate.TabIndex = 14;
+            this.btnMove1Terminate.Text = "End Move Lvl";
+            this.btnMove1Terminate.UseVisualStyleBackColor = true;
+            this.btnMove1Terminate.Click += new System.EventHandler(this.btnMove1Terminate_Click);
             // 
             // btnMove2
             // 
@@ -349,5 +363,6 @@
         private System.Windows.Forms.Button btnMove1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnMove2;
+        private System.Windows.Forms.Button btnMove1Terminate;
     }
 }
