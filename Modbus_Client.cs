@@ -231,7 +231,7 @@ namespace Tritex_ModBus
             }
         }
 
-        //IEG_MOTION_SWITCH
+        //IEG_MOVE_SWITCH
         //This function terminate the Move command in IEG_LEVEL
         private void btnMove1Terminate_Click(object sender, EventArgs e)
         {
@@ -263,8 +263,8 @@ namespace Tritex_ModBus
             try
             {
 
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 4096);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 4096);
                 lbClientStatus.Text = "Write succesful!";
 
             }
