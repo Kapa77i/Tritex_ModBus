@@ -145,6 +145,8 @@ namespace Tritex_ModBus
                 btnJogPlus.Enabled = true;
                 btnJobMinus.Enabled = true;
                 btnGoHome.Enabled = true;
+                btnMove1.Enabled = true;
+                btnMove2.Enabled = true;
 
             }
             catch (Exception ex)
