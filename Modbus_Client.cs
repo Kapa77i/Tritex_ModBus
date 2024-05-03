@@ -133,13 +133,13 @@ namespace Tritex_ModBus
                 Console.WriteLine(modbusTcpClient1.IsConnected.ToString());
                 Console.WriteLine(modbusTcpClient2.IsConnected.ToString());
                 //IEG_MODE, enable
-                modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4316, 2);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2);
 
 
                 //IEG_MODE, Fault reset
-                modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4316, 65535);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
                 lbClientStatus.Text = "Write succesful!";
 
                 btnEnable.Text = "Move Enabled!";
