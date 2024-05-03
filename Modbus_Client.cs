@@ -233,9 +233,11 @@ namespace Tritex_ModBus
             try
             {
 
-                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 1);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 1);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
                 lbClientStatus.Text = "Write succesful!";
+                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 16);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 16);
 
             }
             catch (Exception ex)
