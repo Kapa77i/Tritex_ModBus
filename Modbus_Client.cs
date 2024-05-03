@@ -224,14 +224,17 @@ namespace Tritex_ModBus
             }
         }
 
-        //Move to the level
+        //MOVEMENT 
+        //It uses different channel (4318) and it calls out the mapped movements in the Tritex (Move 0 - 15).
+
+        //IEG_MOVE_LEVEL = move to Move 1 parameter.
         private void btnMove1_Click(object sender, EventArgs e)
         {
             try
             {
 
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 1024);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 1024);
+                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 1);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 1);
                 lbClientStatus.Text = "Write succesful!";
 
             }
@@ -242,6 +245,7 @@ namespace Tritex_ModBus
             }
         }
 
+        //This is only available when the actuator is se to Momentary (channel 4316?)
         //Move to the edge
         private void btnMove2_Click(object sender, EventArgs e)
         {
