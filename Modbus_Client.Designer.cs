@@ -142,6 +142,7 @@
             this.btnGoHome.TabIndex = 9;
             this.btnGoHome.Text = "Go Home";
             this.btnGoHome.UseVisualStyleBackColor = true;
+            this.btnGoHome.Click += new System.EventHandler(this.btnGoHome_Click);
             // 
             // panel1
             // 

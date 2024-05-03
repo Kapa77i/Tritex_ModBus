@@ -73,8 +73,8 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    modbusTcpClient1.Connect(new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
-                    modbusTcpClient2.Connect(new IPEndPoint(IPAddress.Parse(tbM2.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
+                    modbusTcpClient1.Connect((IPAddress.Parse(tbM1.Text)), ModbusEndianness.BigEndian);
+                    modbusTcpClient2.Connect((IPAddress.Parse(tbM2.Text)), ModbusEndianness.BigEndian);
                     Console.WriteLine("Both engines connected");
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
@@ -162,6 +162,21 @@ namespace Tritex_ModBus
                 //STOP movement, IEG_MOTION
                 modbusTcpClient1.WriteSingleRegister(0x00, 4317, 4);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4317, 4);
+                lbClientStatus.Text = "Write succesful!";
+            }
+            catch (Exception ex)
+            {
+                lbClientStatus.Text = "ERROR! " + ex.ToString();
+            }
+        }
+
+        private void btnGoHome_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //STOP movement, IEG_MOTION
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 256);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 256);
                 lbClientStatus.Text = "Write succesful!";
             }
             catch (Exception ex)
