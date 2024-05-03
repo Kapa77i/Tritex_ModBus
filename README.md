@@ -2,7 +2,7 @@
 
 Thesis project of controlling Tritex Actuators with the help of Tritex Expert Software. This is a prototype code to showcase remote connection to the actuators and being able to send commands via Modbus TCP/IP Protocol.
 
-Build uses FluentModbuss nugget. 
+Build uses FluentModbus nugget. 
 
 <b>Current code withholds:</b>
 - Connection to actuators
