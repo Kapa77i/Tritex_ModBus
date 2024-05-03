@@ -235,10 +235,10 @@ namespace Tritex_ModBus
 
                 modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
+                lbClientStatus.Text = "IEF_MOTION_LEVEL succesful!";
+                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
                 lbClientStatus.Text = "Write succesful!";
-                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 16);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 16);
-
             }
             catch (Exception ex)
             {
