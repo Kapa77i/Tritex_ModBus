@@ -110,6 +110,9 @@ namespace Tritex_ModBus
                     btnJogPlus.Enabled = false;
                     btnJobMinus.Enabled = false;
                     btnGoHome.Enabled = false;
+                    btnMove1.Enabled = false;
+                    btnMove2.Enabled = false;
+                    btnMove1Terminate.Enabled = false;
 
                 }
                 catch (Exception ex)
@@ -147,6 +150,7 @@ namespace Tritex_ModBus
                 btnGoHome.Enabled = true;
                 btnMove1.Enabled = true;
                 btnMove2.Enabled = true;
+                btnMove1Terminate.Enabled = true;
 
             }
             catch (Exception ex)
