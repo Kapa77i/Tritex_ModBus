@@ -49,6 +49,7 @@
             this.tbM1 = new System.Windows.Forms.TextBox();
             this.tbM2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnMove2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -187,8 +188,9 @@
             this.btnMove1.Name = "btnMove1";
             this.btnMove1.Size = new System.Drawing.Size(131, 60);
             this.btnMove1.TabIndex = 12;
-            this.btnMove1.Text = "Move";
+            this.btnMove1.Text = "Move Lvl Initiate";
             this.btnMove1.UseVisualStyleBackColor = true;
+            this.btnMove1.Click += new System.EventHandler(this.btnMove1_Click);
             // 
             // tbRegisterVal
             // 
@@ -272,6 +274,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnMove2);
             this.panel3.Controls.Add(this.btnMove1);
             this.panel3.Controls.Add(this.btnJogPlus);
             this.panel3.Controls.Add(this.btnJobMinus);
@@ -280,6 +283,18 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(351, 235);
             this.panel3.TabIndex = 19;
+            // 
+            // btnMove2
+            // 
+            this.btnMove2.Enabled = false;
+            this.btnMove2.Location = new System.Drawing.Point(171, 105);
+            this.btnMove2.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMove2.Name = "btnMove2";
+            this.btnMove2.Size = new System.Drawing.Size(131, 60);
+            this.btnMove2.TabIndex = 13;
+            this.btnMove2.Text = "Move Edge Initiate";
+            this.btnMove2.UseVisualStyleBackColor = true;
+            this.btnMove2.Click += new System.EventHandler(this.btnMove2_Click);
             // 
             // Modbus_Client
             // 
@@ -333,5 +348,6 @@
         private System.Windows.Forms.TextBox tbM2;
         private System.Windows.Forms.Button btnMove1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnMove2;
     }
 }

@@ -222,6 +222,42 @@ namespace Tritex_ModBus
             }
         }
 
+        //Move to the level
+        private void btnMove1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 1024);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 1024);
+                lbClientStatus.Text = "Write succesful!";
+
+            }
+            catch (Exception ex)
+            {
+
+                lbClientStatus.Text = "Error when writing! " + ex.ToString();
+            }
+        }
+
+        //Move to the edge
+        private void btnMove2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
+                lbClientStatus.Text = "Write succesful!";
+
+            }
+            catch (Exception ex)
+            {
+
+                lbClientStatus.Text = "Error when writing! " + ex.ToString();
+            }
+        }
+
 
         private void btnReadRegister_Click(object sender, EventArgs e)
         {
