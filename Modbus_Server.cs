@@ -30,6 +30,14 @@ namespace Tritex_ModBus
 
         }
 
+        //Hide the test server in normal situations
+        //Here if need to test some codes without the simulator
+        //Then just remove this code for testing purposes
+        private void Tritex_Modbus_Shown(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (btnStart.Text == "Start")
@@ -50,6 +58,7 @@ namespace Tritex_ModBus
             }
         }
 
+    
     }
 
 }

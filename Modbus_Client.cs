@@ -16,29 +16,6 @@ using System.Runtime.InteropServices;
 
 namespace Tritex_ModBus
 {
-    ////Addressess listing
-    //int ADD_IEG_MOTION = 4317;  //0x10DD
-    //int ADD_JOG = 6020; //0x1784
-    //int ADD_SLOWVELO = 6022; // 0x1786, UVEL32
-    //int ADD_SLOWVELOHIGH = 6023; // 0x1786, UVEL32
-    //int ADD_FASTVEL = 6024;  // 0x1788, UVEL32
-    //int ADD_FASTVELHIGH = 6025;  // 0x1788, UVEL32
-    //int ADD_ACCELERATION = 6026; // 0x178A, UACC32
-    //int ADD_ACCELERATIONHIGH = 6027; // 0x178A, UACC32
-    //var uniqIdent = 0x00;
-
-    ////Identifier
-    //int IEG_MOTION_ID = 0x10DD;
-    //int ADD_JOG_ID = 0x1784;
-
-    ////Default values to be used:
-    //int VAL_JOG = 1; //# Max int value 65535. -1 if Alternate mode (AMO), -2 if default mode is on (DMO)
-    //int VAL_FASTVEL = 100;
-    //int VAL_FASTVELHIGH = 8;
-    //int VAL_SLOWVEL = 100;
-    //int VAL_SLOWVELHIGH = 8;
-    //int VAL_ACCELERATION = 50;
-    //int VAL_ACCELERATIONHIGH = 8;
     public partial class Modbus_Client : Form
     {
         //EasyModbus.ModbusClient modbusClient;
@@ -61,28 +38,24 @@ namespace Tritex_ModBus
         {
             modbusTcpClient1 = new ModbusTcpClient();
             modbusTcpClient2 = new ModbusTcpClient();
-            var registers = ModbusTcpServer.GetHoldingRegisters();
-            var uniqIdent = 0x00;
 
-            //new IPEndPoint(IPAddress.Parse(cbEngines.Text), int.Parse(tbPort.Text));
-     
-           // Console.WriteLine(IPAddress.Parse(cbEngines.Text));
-            //Console.WriteLine(int.Parse(tbPort.Text));
+            //new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text));
+            //new IPEndPoint(IPAddress.Parse(tbM`2.Text), int.Parse(tbPort.Text));
 
             if (btnConnect.Text == "Connect")
             {
                 try
                 {
-                    modbusTcpClient1.Connect((IPAddress.Parse(tbM1.Text)), ModbusEndianness.BigEndian);
-                    modbusTcpClient2.Connect((IPAddress.Parse(tbM2.Text)), ModbusEndianness.BigEndian);
+                    //Changed this from BigEndian to Little (CHECK THIS IF THERE IS ANY ISSUES!!)
+                    modbusTcpClient1.Connect((IPAddress.Parse(tbM1.Text)), ModbusEndianness.LittleEndian);
+                    modbusTcpClient2.Connect((IPAddress.Parse(tbM2.Text)), ModbusEndianness.LittleEndian);
                     Console.WriteLine("Both engines connected");
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
                     btnConnect.BackColor = Color.Red;
 
-                    //Enable jogs after succesfull connection
+                    //Enable Movement command button available after succesful connection
                     btnEnable.Enabled = true;
-                    btnStop.Enabled = true;
      
                 }
                 catch (Exception ex)
@@ -144,7 +117,8 @@ namespace Tritex_ModBus
 
                 btnEnable.Text = "Move Enabled!";
 
-                //Allow the jogs
+                //Allow the Stop, Home, Jogs and Move command buttons
+                btnStop.Enabled = true;
                 btnJogPlus.Enabled = true;
                 btnJobMinus.Enabled = true;
                 btnGoHome.Enabled = true;
@@ -176,11 +150,12 @@ namespace Tritex_ModBus
             }
         }
 
+
+        //Go to Home position, IEG_MOTION
         private void btnGoHome_Click(object sender, EventArgs e)
         {
             try
             {
-                //STOP movement, IEG_MOTION
                 modbusTcpClient1.WriteSingleRegister(0x00, 4317, 256);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4317, 256);
                 lbClientStatus.Text = "Write succesful!";
@@ -210,7 +185,7 @@ namespace Tritex_ModBus
 
         }
 
-        //Write jog-
+        //Jog- movement
         private void btnJobMinus_Click(object sender, EventArgs e)
         {
             try
@@ -228,7 +203,7 @@ namespace Tritex_ModBus
             }
         }
 
-        //MOVEMENT 
+        //MOVE
         //It uses different channel (4318) and it calls out the mapped movements in the Tritex (Move 0 - 15).
 
         //IEG_MOVE_LEVEL = move to Move 2 parameter.
@@ -236,13 +211,18 @@ namespace Tritex_ModBus
         {
             try
             {
-
+                //Activates the move
                 modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
-                lbClientStatus.Text = "IEF_MOTION_LEVEL succesful!";
+                lbClientStatus.Text = "IEG_MOTION_LEVEL succesful!";
                 modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
                 lbClientStatus.Text = "Write succesful to Move2!";
+
+                //Possibille IEG_MOTION command? Comment stuff above when testing this
+                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
+
             }
             catch (Exception ex)
             {
@@ -250,16 +230,22 @@ namespace Tritex_ModBus
                 lbClientStatus.Text = "Error when writing! " + ex.ToString();
             }
         }
+
+        //IEG_MOTION_SWITCH
         //This function terminate the Move command in IEG_LEVEL
         private void btnMove1Terminate_Click(object sender, EventArgs e)
         {
             try
             {
-                modbusTcpClient1.WriteSingleRegister(0x00, 4322, 2);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4322, 2);
-                //For move 2
-                modbusTcpClient1.WriteSingleRegister(0x00, 4322, 8);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4322, 8);
+                ////Does not terminate the move - why?
+                //modbusTcpClient1.WriteSingleRegister(0x00, 4322, 2);
+                //modbusTcpClient2.WriteSingleRegister(0x00, 4322, 2);
+                ////For move 2
+                //modbusTcpClient1.WriteSingleRegister(0x00, 4322, 4);
+                //modbusTcpClient2.WriteSingleRegister(0x00, 4322, 4);
+                //How about if we make it as a 0?
+                modbusTcpClient1.WriteSingleRegister(0x00, 4322, 0);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4322, 0);
                 lbClientStatus.Text = "Write succesful!";
 
             }
