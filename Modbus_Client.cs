@@ -123,8 +123,12 @@ namespace Tritex_ModBus
         //Enable the movement first, always!
         private void btnEnable_Click(object sender, EventArgs e)
         {
+            //modbusTcpClient1.Connect(new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
+            //modbusTcpClient2.Connect(new IPEndPoint(IPAddress.Parse(tbM2.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
             try
             {
+                Console.WriteLine(modbusTcpClient1.IsConnected.ToString());
+                Console.WriteLine(modbusTcpClient2.IsConnected.ToString());
                 //IEG_MODE, enable
                 modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2);
