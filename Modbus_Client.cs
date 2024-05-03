@@ -255,6 +255,8 @@ namespace Tritex_ModBus
         {
             try
             {
+                modbusTcpClient1.WriteSingleRegister(0x00, 4322, 2);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4322, 2);
                 //For move 2
                 modbusTcpClient1.WriteSingleRegister(0x00, 4322, 8);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4322, 8);
