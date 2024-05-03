@@ -22,15 +22,10 @@ namespace Tritex_ModBus
         ModbusTcpClient modbusTcpClient;
         ModbusTcpClient modbusTcpClient1;
         ModbusTcpClient modbusTcpClient2;
-        ModbusTcpServer ModbusTcpServer = new ModbusTcpServer();
-
-        int SLAVE_ID = 1; 
-        
 
         public Modbus_Client()
         {
             InitializeComponent();
-           
         }
 
         //Connection button functionality
@@ -81,7 +76,7 @@ namespace Tritex_ModBus
                     btnEnable.Enabled = false;
                     btnStop.Enabled = false;
                     btnJogPlus.Enabled = false;
-                    btnJobMinus.Enabled = false;
+                    btnJogMinus.Enabled = false;
                     btnGoHome.Enabled = false;
                     btnMove1.Enabled = false;
                     btnMove2.Enabled = false;
@@ -120,7 +115,7 @@ namespace Tritex_ModBus
                 //Allow the Stop, Home, Jogs and Move command buttons
                 btnStop.Enabled = true;
                 btnJogPlus.Enabled = true;
-                btnJobMinus.Enabled = true;
+                btnJogMinus.Enabled = true;
                 btnGoHome.Enabled = true;
                 btnMove1.Enabled = true;
                 btnMove2.Enabled = true;
@@ -169,37 +164,81 @@ namespace Tritex_ModBus
         //Jog+ movement
         private void btnJogPlus_Click(object sender, EventArgs e)
         {
-            try
+            if (btnJogPlus.BackColor == Color.White)
             {
-                
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 16);
-                lbClientStatus.Text = "Write succesful!";
+                try
+                {
 
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 16);
+                    btnJogPlus.BackColor = Color.DarkOrange;
+                    lbClientStatus.Text = "Write succesful!";
+
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
             }
-            catch (Exception ex)
+            else if (btnJogPlus.BackColor == Color.DarkOrange)
             {
+                try
+                {
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 16);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 32);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 32);
+                    btnJogPlus.BackColor = Color.White;
+                    lbClientStatus.Text = "Write succesful, stopping Jog motion!";
 
-                lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
             }
 
         }
 
         //Jog- movement
-        private void btnJobMinus_Click(object sender, EventArgs e)
+        private void btnJogMinus_Click(object sender, EventArgs e)
         {
-            try
+            if (btnJogMinus.BackColor == Color.White)
             {
+                try
+                {
 
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 32);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 32);
-                lbClientStatus.Text = "Write succesful!";
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 32);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 32);
+                    btnJogMinus.BackColor = Color.DarkOrange;
+                    lbClientStatus.Text = "Write succesful!";
 
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
             }
-            catch (Exception ex)
+            else if (btnJogPlus.BackColor == Color.DarkOrange)
             {
+                try
+                {
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 16);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 32);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 32);
+                    btnJogMinus.BackColor = Color.White;
+                    lbClientStatus.Text = "Write succesful, stopping Jog motion!";
 
-                lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
             }
         }
 
@@ -287,7 +326,6 @@ namespace Tritex_ModBus
 
             try
             {
-                //var data = modbusTcpClient.ReadI
                 var shortDataResult = modbusTcpClient.ReadHoldingRegisters<short>(uniqIdent, startingAddress, 2);
 
                 Console.WriteLine("Haettu tulos: ");
@@ -308,6 +346,5 @@ namespace Tritex_ModBus
            
         }
 
-       
     }
 }
