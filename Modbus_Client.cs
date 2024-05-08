@@ -185,10 +185,8 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
-                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 16);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 32);
-                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 32);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
                     btnJogPlus.BackColor = Color.White;
                     lbClientStatus.Text = "Write succesful, stopping Jog motion!";
 
