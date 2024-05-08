@@ -248,16 +248,16 @@ namespace Tritex_ModBus
             try
             {
                 //Activates the move
-                //modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
-                //modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
-                //lbClientStatus.Text = "IEG_MOTION_LEVEL succesful!";
-                //modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
-                //modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
-                //lbClientStatus.Text = "Write succesful to Move2!";
+                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
+                lbClientStatus.Text = "IEG_MOTION_LEVEL succesful!";
+                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
+                lbClientStatus.Text = "Write succesful to Move2!";
 
                 //Possibille IEG_MOTION command? Comment stuff above when testing this
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
+                //modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
+                //modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
 
             }
             catch (Exception ex)
