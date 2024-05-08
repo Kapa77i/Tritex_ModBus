@@ -164,8 +164,8 @@ namespace Tritex_ModBus
         //Jog+ movement
         private void btnJogPlus_Click(object sender, EventArgs e)
         {
-            if (btnJogPlus.BackColor == Color.White)
-            {
+            //if (btnJogPlus.BackColor == Color.White)
+            //{
                 try
                 {
 
@@ -180,9 +180,9 @@ namespace Tritex_ModBus
 
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
-            }
-            else if (btnJogPlus.BackColor == Color.DarkOrange)
-            {
+            //}
+            //else if (btnJogPlus.BackColor == Color.DarkOrange)
+            //{
                 try
                 {
                     modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
@@ -198,15 +198,15 @@ namespace Tritex_ModBus
 
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
-            }
+            //}
 
         }
 
         //Jog- movement
         private void btnJogMinus_Click(object sender, EventArgs e)
         {
-            if (btnJogMinus.BackColor == Color.White)
-            {
+        //    if (btnJogMinus.BackColor == Color.White)
+        //    {
                 try
                 {
 
@@ -221,9 +221,9 @@ namespace Tritex_ModBus
 
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
-            }
-            else if (btnJogPlus.BackColor == Color.DarkOrange)
-            {
+            //}
+            //else if (btnJogPlus.BackColor == Color.DarkOrange)
+            //{
                 try
                 {
                     modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
@@ -239,7 +239,7 @@ namespace Tritex_ModBus
 
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
-            }
+            //}
         }
 
         //MOVE
