@@ -106,8 +106,8 @@ namespace Tritex_ModBus
 
 
                 //IEG_MODE, Fault reset
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
+               // modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
+               // modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
                 lbClientStatus.Text = "Write succesful!";
 
                 btnEnable.Text = "Move Enabled!";
@@ -185,6 +185,7 @@ namespace Tritex_ModBus
             {
                 try
                 {
+                    //Works
                     modbusTcpClient1.WriteSingleRegister(0x00, 4317, 0);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
                     btnJogPlus.BackColor = Color.White;
@@ -224,10 +225,8 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
-                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 16);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 32);
-                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 32);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
                     btnJogMinus.BackColor = Color.White;
                     lbClientStatus.Text = "Write succesful, stopping Jog motion!";
 
