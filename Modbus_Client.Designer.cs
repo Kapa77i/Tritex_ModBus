@@ -107,24 +107,26 @@
             // 
             // btnJogPlus
             // 
+            this.btnJogPlus.BackColor = System.Drawing.Color.White;
             this.btnJogPlus.Enabled = false;
             this.btnJogPlus.Location = new System.Drawing.Point(22, 20);
             this.btnJogPlus.Name = "btnJogPlus";
             this.btnJogPlus.Size = new System.Drawing.Size(98, 49);
             this.btnJogPlus.TabIndex = 7;
             this.btnJogPlus.Text = "Jog+";
-            this.btnJogPlus.UseVisualStyleBackColor = true;
+            this.btnJogPlus.UseVisualStyleBackColor = false;
             this.btnJogPlus.Click += new System.EventHandler(this.btnJogPlus_Click);
             // 
             // btnJogMinus
             // 
+            this.btnJogMinus.BackColor = System.Drawing.Color.White;
             this.btnJogMinus.Enabled = false;
             this.btnJogMinus.Location = new System.Drawing.Point(126, 20);
             this.btnJogMinus.Name = "btnJogMinus";
             this.btnJogMinus.Size = new System.Drawing.Size(98, 49);
             this.btnJogMinus.TabIndex = 8;
             this.btnJogMinus.Text = "Jog-";
-            this.btnJogMinus.UseVisualStyleBackColor = true;
+            this.btnJogMinus.UseVisualStyleBackColor = false;
             this.btnJogMinus.Click += new System.EventHandler(this.btnJogMinus_Click);
             // 
             // btnGoHome

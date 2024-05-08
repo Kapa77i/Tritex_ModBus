@@ -164,7 +164,7 @@ namespace Tritex_ModBus
         //Jog+ movement
         private void btnJogPlus_Click(object sender, EventArgs e)
         {
-            if (btnJogPlus.BackColor == Color.White)
+            if (btnJogPlus.BackColor == )
             {
                 try
                 {
