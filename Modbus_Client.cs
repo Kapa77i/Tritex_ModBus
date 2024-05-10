@@ -50,6 +50,7 @@ namespace Tritex_ModBus
                     //Enable Movement command button available after succesful connection
                     btnEnable.Enabled = true;
                     btnAlt.Enabled = true;
+                    btnGoHome.Enabled = true;
 
                 }
                 catch (Exception ex)
@@ -115,7 +116,7 @@ namespace Tritex_ModBus
                     btnStop.Enabled = true;
                     btnJogPlus.Enabled = true;
                     btnJogMinus.Enabled = true;
-                    btnGoHome.Enabled = true;
+                    //btnGoHome.Enabled = true;
                     btnMove1.Enabled = true;
 
                     //Disable Alt mode
@@ -151,7 +152,7 @@ namespace Tritex_ModBus
                     btnStop.Enabled = false;
                     btnJogPlus.Enabled = false;
                     btnJogMinus.Enabled = false;
-                    btnGoHome.Enabled = false;
+                   // btnGoHome.Enabled = false;
                     btnMove1.Enabled = false;
 
                     //Able Alt mode
@@ -372,6 +373,10 @@ namespace Tritex_ModBus
                     //IEG_MODE Enable Maintained value 2
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
+
+                    //IEG_MODE Break Override
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
 
                     //IEG_MODE Alt Mode value 128
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
