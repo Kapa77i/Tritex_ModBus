@@ -161,6 +161,8 @@ namespace Tritex_ModBus
             }
         }
 
+        /*FOLLOWING CODE IS TO JUST SHOWCASE THAT THE JOGS AND MOVEMENT COMMANDS WORK*/
+
         //Jog+ movement
         private void btnJogPlus_Click(object sender, EventArgs e)
         {
@@ -245,6 +247,12 @@ namespace Tritex_ModBus
 
         //MOVE
         //It uses different channel (4318) and it calls out the mapped movements in the Tritex (Move 0 - 15).
+        //You can map these commands in Tritex beforehand, set all the needed parameters for upper and lower limits
+        //and then just call the channel to execute the command.
+        /*You can also use the Modbus Mapping tool, map the neede parameters beforehand and then just call them, but 
+         by the time of writing this code, I have not yet checked that closely. Checking from the manual, it should follow
+        the same procedure as above. If you want to set the parameters outside Tritex, you need to call separate channels before hand
+        to set the parameters and then send the execution command of the wanted movement. */
 
         //IEG_MOVE_LEVEL = move to Move 2 parameter.
         private void btnMove1_Click(object sender, EventArgs e)
@@ -343,37 +351,99 @@ namespace Tritex_ModBus
             }
         }
 
-       
-        private void btnReadRegister_Click(object sender, EventArgs e)
+
+        //Enabling Alternate Mode 5107
+        private void btnAlt_Click(object sender, EventArgs e)
         {
-            var uniqIdent = 0x00;
-            var startingAddress = int.Parse(tbRegisterVal.Text);
-            //var registers = ModbusTcpServer.GetHoldingRegisters();
-            //registers.SetBigEndian<int>(address: 1, value: 99);
-            //Console.WriteLine(registers.ToString());
-            //Span<short> registers.GetBigEndian<T>();
-
-            try
+            if (btnAlt.Text == "Alternate Mode")
             {
-                var shortDataResult = modbusTcpClient.ReadHoldingRegisters<short>(uniqIdent, startingAddress, 2);
-
-                Console.WriteLine("Haettu tulos: ");
-                foreach (var item in shortDataResult) { 
-                
-                    Console.WriteLine(item.ToString());
+                try
+                {
+                    //Activates the move
+                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 1);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 1);
+                    lbClientStatus.Text = "Write succesful, Alternate Mode Engaged";
+                    btnMove1.BackColor = Color.DarkOrange;
+                    btnMove1.Text = "STOP Alt Mode";
 
                 }
-                //Console.WriteLine(shortDataResult[0]);
+                catch (Exception ex)
+                {
 
-                lbClientStatus.Text = "Read succesful!";
-                tbShowRegVal.Text = shortDataResult[0].ToString();
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
             }
-            catch (Exception ex)
+            else if (btnAlt.Text == "STOP Alt Mode")
             {
-                lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                try
+                {
+                    //Stop the alternate mode
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4318, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4318, 0);
+                    lbClientStatus.Text = "Write the 'stop the move' succesfully";
+                    btnAlt.BackColor = Color.White;
+                    btnAlt.Text = "Alternate Mode";
+
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
             }
-           
         }
+
+
+
+
+
+
+
+
+        /*FOLLOWING CODE IS FOR THE ALTERNATE MODE OF THE INTERFACE WITH LIMITS ALREADY SET IN THE TRITEX SOFTWARE DIRECTLY*/
+        //You can set the primary parameters (Position, Velocity, Torque) either on the Tritex Expert Software
+        //or you can sent them in separate command before excecuting these in the same way, as the code is executed. 
+        /*´Reading from the documentation if you would like to set all the parameters by yourself: basically you would pick the correct register from the Tritex listing (e.g., Analog Position, Channel 7100)
+         send the needed parameters in one single Write Register command (e.g., for Channel 7100 you need to sent information for 
+        minimmum, maximum, velocity, acceleration, current limit plus and minus) with correct parameters before executing 
+        the actual position command*/
+        /*For this code, I have used the Tritex software to set these basic limits and I am only sending the execute commands 
+         via this code using the Generic Driver profile that I have set up directly on the Tritex software.*/
+
+
+
+
+        //REad register code, needs to add the handler if used.
+        //private void btnReadRegister_Click(object sender, EventArgs e)
+        //{
+        //    var uniqIdent = 0x00;
+        //    var startingAddress = int.Parse(tbRegisterVal.Text);
+        //    //var registers = ModbusTcpServer.GetHoldingRegisters();
+        //    //registers.SetBigEndian<int>(address: 1, value: 99);
+        //    //Console.WriteLine(registers.ToString());
+        //    //Span<short> registers.GetBigEndian<T>();
+
+        //    try
+        //    {
+        //        var shortDataResult = modbusTcpClient.ReadHoldingRegisters<short>(uniqIdent, startingAddress, 2);
+
+        //        Console.WriteLine("Haettu tulos: ");
+        //        foreach (var item in shortDataResult) { 
+
+        //            Console.WriteLine(item.ToString());
+
+        //        }
+        //        //Console.WriteLine(shortDataResult[0]);
+
+        //        lbClientStatus.Text = "Read succesful!";
+        //        tbShowRegVal.Text = shortDataResult[0].ToString();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lbClientStatus.Text = "Error when writing! " + ex.ToString();
+        //    }
+
+        //}
 
     }
 }
