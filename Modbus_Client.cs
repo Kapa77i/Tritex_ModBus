@@ -144,7 +144,7 @@ namespace Tritex_ModBus
                     modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
 
                     lbClientStatus.Text = "Disabled Enable Move!";
-                    btnEnable.Text = "Move Enable";
+                    btnEnable.Text = "Enable Move";
                     btnEnable.BackColor = Color.White;
 
                     //Allow the Stop, Home, Jogs and Move command buttons
