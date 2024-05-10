@@ -363,7 +363,7 @@ namespace Tritex_ModBus
         /*For this code, I have used the Tritex software to set these basic limits and I am only sending the execute commands 
          via this code using the Generic Driver profile that I have set up directly on the Tritex software.*/
 
-        //Enabling Alternate Mode 5107
+        //Enabling Alternate Mode with IEG_MOTION by sending channel 4316 value 128 (Tritex parameter manual page 77)
         private void btnAlt_Click(object sender, EventArgs e)
         {
             if (btnAlt.Text == "Alternate Mode")
@@ -371,8 +371,8 @@ namespace Tritex_ModBus
                 try
                 {
                     //Activates the move
-                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
                     lbClientStatus.Text = "Write succesful, Alternate Mode Engaged";
                     btnAlt.BackColor = Color.DarkOrange;
                     btnAlt.Text = "STOP Alt Mode";
