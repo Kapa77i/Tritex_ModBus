@@ -248,9 +248,9 @@ namespace Tritex_ModBus
             try
             {
                 //Activates the move
-                //modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
-                //modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
-                //lbClientStatus.Text = "IEG_MOTION_LEVEL succesful!";
+                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
+                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
+                lbClientStatus.Text = "IEG_MOTION_LEVEL succesful!";
                 modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
                 lbClientStatus.Text = "Write succesful to Move2!";
