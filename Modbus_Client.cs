@@ -325,6 +325,10 @@ namespace Tritex_ModBus
             {
                 try
                 {
+                    //IED_MODE Reset Value 65535
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
+
                     //IED_MODE Enable Maintained value 2
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
