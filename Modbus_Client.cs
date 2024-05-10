@@ -341,6 +341,7 @@ namespace Tritex_ModBus
                     btnAlt.Text = "STOP Alt Mode";
 
                     //Enable Alt Buttons
+                    btnBreak.Enabled = true;
                     btnPosition.Enabled = true;
                     btnVelocity.Enabled = true;
                     btnTorque.Enabled = true;
@@ -364,6 +365,7 @@ namespace Tritex_ModBus
                     btnAlt.Text = "Alternate Mode";
 
                     //Unable Alt Buttons
+                    btnBreak.Enabled = false;
                     btnPosition.Enabled = false;
                     btnVelocity.Enabled = false;
                     btnTorque.Enabled = false;
