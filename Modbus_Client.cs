@@ -413,27 +413,22 @@ namespace Tritex_ModBus
         //Activate movement
         //Register no. 5107, Name: AltCommandMode, Value 2 (Analog Position), Tritex Parameter Manual page 95
         //Another option?
-        //Register no. 7188, Name: Alt_Position, Value ??? 2 ??? (Analog Position), Tritex Parameter Manual page 102
+        //Register no. 7188, Name: Alt_Position, Value ??? 2 ??? (Analog Position), Tritex Parameter Manual page 
         /*This works in away that you set the amount og movement EITHER in the Tritex Software Directely or by the separate commands.
          When you have stated the limits of the movement (E.g. Minimum 0.00 REVS and Maximum 6.00 REVS) you will send the activation
         signal here, the movement will continue until you click the button again, which will signal end of the movement. */
         private void btnPosition_Click(object sender, EventArgs e)
         {
-            if (btnAlt.Text == "Alternate Mode")
+            if (btnPosition.Text == "Alternate Mode")
             {
                 try
                 {
                     //Activates the move
                     modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
                     modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
-                    lbClientStatus.Text = "Writing Position!";
-                    btnAlt.BackColor = Color.DarkOrange;
-                    btnAlt.Text = "STOP";
-
-                    //Enable Alt Buttons
-                    btnPosition.Enabled = true;
-                    btnVelocity.Enabled = true;
-                    btnTorque.Enabled = true;
+                    lbClientStatus.Text = " Writing Position!";
+                    btnPosition.BackColor = Color.DarkOrange;
+                    btnPosition.Text = "STOP";
 
                 }
                 catch (Exception ex)
@@ -442,16 +437,16 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
             }
-            else if (btnAlt.Text == "STOP Alt Mode")
+            else if (btnPosition.Text == "STOP Alt Mode")
             {
                 try
                 {
                     //Stop the alternate mode
                     modbusTcpClient1.WriteSingleRegister(0x00, 5107, 0);
                     modbusTcpClient2.WriteSingleRegister(0x00, 5107, 0);
-                    lbClientStatus.Text = "Stopped Position move";
-                    btnAlt.BackColor = Color.White;
-                    btnAlt.Text = "Position";
+                    lbClientStatus.Text = "Stopped writing position";
+                    btnPosition.BackColor = Color.White;
+                    btnPosition.Text = "Position";
 
                 }
                 catch (Exception ex)
