@@ -249,26 +249,54 @@ namespace Tritex_ModBus
         //IEG_MOVE_LEVEL = move to Move 2 parameter.
         private void btnMove1_Click(object sender, EventArgs e)
         {
-            try
+            if (btnMove1.Text == "Move Lvl Initiate")
             {
-                //Activates the move
-                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
-                lbClientStatus.Text = "IEG_MOTION_LEVEL succesful!";
-                modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
-                lbClientStatus.Text = "Write succesful to Move2!";
+                try
+                {
+                    //Activates the move
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
+                    lbClientStatus.Text = "IEG_MOTION_LEVEL succesful!";
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
+                    lbClientStatus.Text = "Write succesful to Move2!";
+                    btnMove1.BackColor = Color.DarkOrange;
+                    btnMove1.Text = "STOP Move";
 
-                //Possibille IEG_MOTION command? Comment stuff above when testing this
-                //modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
-                //modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
+                    //Possibille IEG_MOTION command? Comment stuff above when testing this
+                    //modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
+                    //modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
 
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
             }
-            catch (Exception ex)
+            else if (btnMove1.Text == "STOP Move")
             {
+                try
+                {
+                    //Stop the move?
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4318, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4318, 0);
+                    lbClientStatus.Text = "Write the 'stop the move' succesfully";
+                    btnMove1.BackColor = Color.White;
+                    btnMove1.Text = "Move Lvl Initiate";
 
-                lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                    //Possibille IEG_MOTION command? Comment stuff above when testing this
+                    //modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
+                    //modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
+
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
             }
+          
         }
 
         //IEG_MOVE_SWITCH
