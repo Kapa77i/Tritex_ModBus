@@ -340,6 +340,10 @@ namespace Tritex_ModBus
                     btnAlt.BackColor = Color.DarkOrange;
                     btnAlt.Text = "STOP Alt Mode";
 
+                    //IED_MODE Break Override
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
+
                     //Enable Alt Buttons
                     btnPosition.Enabled = true;
                     btnVelocity.Enabled = true;
