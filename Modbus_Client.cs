@@ -353,6 +353,16 @@ namespace Tritex_ModBus
         }
 
 
+        /*FOLLOWING CODE IS FOR THE ALTERNATE MODE OF THE INTERFACE WITH LIMITS ALREADY SET IN THE TRITEX SOFTWARE DIRECTLY*/
+        //You can set the primary parameters (Position, Velocity, Torque) either on the Tritex Expert Software
+        //or you can sent them in separate command before excecuting these in the same way, as the code is executed. 
+        /*´Reading from the documentation if you would like to set all the parameters by yourself: basically you would pick the correct register from the Tritex listing (e.g., Analog Position, Channel 7100)
+         send the needed parameters in one single Write Register command (e.g., for Channel 7100 you need to sent information for 
+        minimmum, maximum, velocity, acceleration, current limit plus and minus) with correct parameters before executing 
+        the actual position command*/
+        /*For this code, I have used the Tritex software to set these basic limits and I am only sending the execute commands 
+         via this code using the Generic Driver profile that I have set up directly on the Tritex software.*/
+
         //Enabling Alternate Mode 5107
         private void btnAlt_Click(object sender, EventArgs e)
         {
@@ -361,16 +371,16 @@ namespace Tritex_ModBus
                 try
                 {
                     //Activates the move
-                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 1);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 1);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
                     lbClientStatus.Text = "Write succesful, Alternate Mode Engaged";
-                    btnMove1.BackColor = Color.DarkOrange;
-                    btnMove1.Text = "STOP Alt Mode";
+                    btnAlt.BackColor = Color.DarkOrange;
+                    btnAlt.Text = "STOP Alt Mode";
 
                     //Enable Alt Buttons
                     btnPosition.Enabled = true;
                     btnVelocity.Enabled = true;
-                    btnTorque.Enabled = true; 
+                    btnTorque.Enabled = true;
 
                 }
                 catch (Exception ex)
@@ -398,24 +408,6 @@ namespace Tritex_ModBus
                 }
             }
         }
-
-
-
-
-
-
-
-
-        /*FOLLOWING CODE IS FOR THE ALTERNATE MODE OF THE INTERFACE WITH LIMITS ALREADY SET IN THE TRITEX SOFTWARE DIRECTLY*/
-        //You can set the primary parameters (Position, Velocity, Torque) either on the Tritex Expert Software
-        //or you can sent them in separate command before excecuting these in the same way, as the code is executed. 
-        /*´Reading from the documentation if you would like to set all the parameters by yourself: basically you would pick the correct register from the Tritex listing (e.g., Analog Position, Channel 7100)
-         send the needed parameters in one single Write Register command (e.g., for Channel 7100 you need to sent information for 
-        minimmum, maximum, velocity, acceleration, current limit plus and minus) with correct parameters before executing 
-        the actual position command*/
-        /*For this code, I have used the Tritex software to set these basic limits and I am only sending the execute commands 
-         via this code using the Generic Driver profile that I have set up directly on the Tritex software.*/
-
 
 
 
