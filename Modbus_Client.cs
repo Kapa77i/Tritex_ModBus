@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using FluentModbus;
 using EasyModbus;
 using System.Runtime.InteropServices;
+using System.Diagnostics.Eventing.Reader;
 
 // https://apollo3zehn.github.io/FluentModbus/
 
@@ -95,38 +96,76 @@ namespace Tritex_ModBus
         //Enable the movement first, always!
         private void btnEnable_Click(object sender, EventArgs e)
         {
-            //modbusTcpClient1.Connect(new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
-            //modbusTcpClient2.Connect(new IPEndPoint(IPAddress.Parse(tbM2.Text), int.Parse(tbPort.Text)), ModbusEndianness.BigEndian);
-            try
+            if (btnEnable.Text == "Enable Move")
             {
-                Console.WriteLine(modbusTcpClient1.IsConnected.ToString());
-                Console.WriteLine(modbusTcpClient2.IsConnected.ToString());
-                //IEG_MOTION, enable
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2);
+                try
+                {
+                    //IEG_MOTIION, Fault reset
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
+
+                    //IEG_MOTION, enable
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2);
+                    lbClientStatus.Text = "Enable (Maintained) activated!";
+                    btnEnable.Text = "Move Enabled!";
+                    btnEnable.BackColor = Color.DarkOrange;
+
+                    //Allow the Stop, Home, Jogs and Move command buttons
+                    btnStop.Enabled = true;
+                    btnJogPlus.Enabled = true;
+                    btnJogMinus.Enabled = true;
+                    btnGoHome.Enabled = true;
+                    btnMove1.Enabled = true;
+
+                    //Disable Alt mode
+                    btnAlt.Enabled = false;
 
 
-                //IEG_MOTIION, Fault reset
-               // modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
-               // modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
-                lbClientStatus.Text = "Write succesful!";
-
-                btnEnable.Text = "Move Enabled!";
-
-                //Allow the Stop, Home, Jogs and Move command buttons
-                btnStop.Enabled = true;
-                btnJogPlus.Enabled = true;
-                btnJogMinus.Enabled = true;
-                btnGoHome.Enabled = true;
-                btnMove1.Enabled = true;
-
+                }
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "ERROR! " + ex.ToString();
+                }
             }
-            catch (Exception ex)
+
+
+            else if (btnEnable.Text == "Move Enabled!")
             {
-                lbClientStatus.Text = "ERROR! " + ex.ToString();
-            }       
-           
+                try
+                {
+                    
+                    //IEG_MOTION, Fault reset
+                     modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
+
+                    //IEG_MOTION, enable
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
+
+                    lbClientStatus.Text = "Disabled Enable Move!";
+                    btnEnable.Text = "Move Enable";
+                    btnEnable.BackColor = Color.White;
+
+                    //Allow the Stop, Home, Jogs and Move command buttons
+                    btnStop.Enabled = false;
+                    btnJogPlus.Enabled = false;
+                    btnJogMinus.Enabled = false;
+                    btnGoHome.Enabled = false;
+                    btnMove1.Enabled = false;
+
+                    //Able Alt mode
+                    btnAlt.Enabled = true;
+
+                }
+
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "ERROR! " + ex.ToString();
+                }
+            }  
         }
+           
 
         //Stop any and all movement
         private void btnStop_Click(object sender, EventArgs e)
@@ -319,17 +358,18 @@ namespace Tritex_ModBus
 
         //Enabling Alternate Mode with IEG_MODE by sending channel 4316 value 128 (Tritex parameter manual page 77)
         //Enables it, but also puts the machine on break (disabled) - why? 
+        //Added manual override
         private void btnAlt_Click(object sender, EventArgs e)
         {
             if (btnAlt.Text == "Alternate Mode")
             {
                 try
                 {
-                    //IED_MODE Reset Value 65535
+                    //IEG_MODE Reset Value 65535
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
 
-                    //IED_MODE Enable Maintained value 2
+                    //IEG_MODE Enable Maintained value 2
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
 
@@ -345,6 +385,9 @@ namespace Tritex_ModBus
                     btnPosition.Enabled = true;
                     btnVelocity.Enabled = true;
                     btnTorque.Enabled = true;
+
+                    //Disable IEG_MOTION
+                    btnEnable.Enabled = false;
 
                 }
                 catch (Exception ex)
@@ -364,16 +407,18 @@ namespace Tritex_ModBus
                     btnAlt.BackColor = Color.White;
                     btnAlt.Text = "Alternate Mode";
 
-                    //Unable Alt Buttons
+                    //Disable Alt Buttons
                     btnBreak.Enabled = false;
                     btnPosition.Enabled = false;
                     btnVelocity.Enabled = false;
                     btnTorque.Enabled = false;
 
+                    //Enable IEG_MOTION
+                    btnEnable.Enabled = true;
+
                 }
                 catch (Exception ex)
                 {
-
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
             }
