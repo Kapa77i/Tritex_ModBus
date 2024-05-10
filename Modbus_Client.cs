@@ -172,7 +172,8 @@ namespace Tritex_ModBus
                     modbusTcpClient1.WriteSingleRegister(0x00, 4317, 16);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4317, 16);
                     btnJogPlus.BackColor = Color.DarkOrange;
-                    lbClientStatus.Text = "Write succesful!";
+                    lbClientStatus.Text = "Jogging!";
+                    btnJogPlus.Text = "STOP Jog";
 
                 }
                 catch (Exception ex)
@@ -189,7 +190,8 @@ namespace Tritex_ModBus
                     modbusTcpClient1.WriteSingleRegister(0x00, 4317, 0);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
                     btnJogPlus.BackColor = Color.White;
-                    lbClientStatus.Text = "Write succesful, stopping Jog motion!";
+                    btnJogPlus.Text = "Jog+";
+                    lbClientStatus.Text = "Stopped Jog motion!";
 
                 }
                 catch (Exception ex)
@@ -212,7 +214,8 @@ namespace Tritex_ModBus
                     modbusTcpClient1.WriteSingleRegister(0x00, 4317, 32);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4317, 32);
                     btnJogMinus.BackColor = Color.DarkOrange;
-                    lbClientStatus.Text = "Write succesful!";
+                    lbClientStatus.Text = "Jogging!";
+                    btnJogMinus.Text = "STOP Jog";
 
                 }
                 catch (Exception ex)
@@ -228,7 +231,8 @@ namespace Tritex_ModBus
                     modbusTcpClient1.WriteSingleRegister(0x00, 4317, 0);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
                     btnJogMinus.BackColor = Color.White;
-                    lbClientStatus.Text = "Write succesful, stopping Jog motion!";
+                    btnJogMinus.Text = "Jog-";
+                    lbClientStatus.Text = "Stopped Jog motion!";
 
                 }
                 catch (Exception ex)
