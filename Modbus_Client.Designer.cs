@@ -49,6 +49,7 @@
             this.btnPosition = new System.Windows.Forms.Button();
             this.btnVelocity = new System.Windows.Forms.Button();
             this.btnAlt = new System.Windows.Forms.Button();
+            this.btnBreak = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -240,6 +241,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnBreak);
             this.panel4.Controls.Add(this.btnTorque);
             this.panel4.Controls.Add(this.btnPosition);
             this.panel4.Controls.Add(this.btnVelocity);
@@ -299,6 +301,19 @@
             this.btnAlt.UseVisualStyleBackColor = false;
             this.btnAlt.Click += new System.EventHandler(this.btnAlt_Click);
             // 
+            // btnBreak
+            // 
+            this.btnBreak.BackColor = System.Drawing.Color.White;
+            this.btnBreak.Enabled = false;
+            this.btnBreak.Location = new System.Drawing.Point(33, 127);
+            this.btnBreak.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBreak.Name = "btnBreak";
+            this.btnBreak.Size = new System.Drawing.Size(131, 60);
+            this.btnBreak.TabIndex = 12;
+            this.btnBreak.Text = "Override Breaks";
+            this.btnBreak.UseVisualStyleBackColor = false;
+            this.btnBreak.Click += new System.EventHandler(this.btnBreak_Click);
+            // 
             // Modbus_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -350,5 +365,6 @@
         private System.Windows.Forms.Button btnPosition;
         private System.Windows.Forms.Button btnVelocity;
         private System.Windows.Forms.Button btnAlt;
+        private System.Windows.Forms.Button btnBreak;
     }
 }

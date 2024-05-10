@@ -333,16 +333,12 @@ namespace Tritex_ModBus
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
 
-                    //IEG_MODE Alt Mode value 4, 8, 16, or 32
+                    //IEG_MODE Alt Mode value 128
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
                     lbClientStatus.Text = "Write succesful, Alternate Mode Engaged";
                     btnAlt.BackColor = Color.DarkOrange;
                     btnAlt.Text = "STOP Alt Mode";
-
-                    //IED_MODE Break Override
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
 
                     //Enable Alt Buttons
                     btnPosition.Enabled = true;
@@ -379,6 +375,48 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
             }
+        }
+
+
+        //Override breaks
+        private void btnBreak_Click(object sender, EventArgs e)
+        {
+            if (btnBreak.Text == "Override Breaks")
+            {
+                try
+                {
+                    //IEG_MODE Break Override
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
+                    btnBreak.BackColor = Color.White;
+                    btnBreak.Text = "STOP";
+
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
+            }
+            else if (btnBreak.Text == "STOP")
+            {
+                try
+                {
+                    //Stop the alternate mode
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4316, 0);
+                    lbClientStatus.Text = "Break Override turned off succesfully";
+                    btnBreak.BackColor = Color.White;
+                    btnBreak.Text = "Override Breaks";
+
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
+            }
+         
         }
 
 
@@ -428,11 +466,6 @@ namespace Tritex_ModBus
                 }
             }
         }
-
-
-
-
-
 
         //REad register code, needs to add the handler if used.
         //private void btnReadRegister_Click(object sender, EventArgs e)
