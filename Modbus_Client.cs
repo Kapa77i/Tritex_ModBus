@@ -120,7 +120,6 @@ namespace Tritex_ModBus
                 btnMove1.Enabled = true;
                 btnMove2.Enabled = true;
                 btnMove1Terminate.Enabled = true;
-                btnAlt.Enabled = true;
 
             }
             catch (Exception ex)
@@ -403,6 +402,11 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Alt mode turned off succesfully";
                     btnAlt.BackColor = Color.White;
                     btnAlt.Text = "Alternate Mode";
+
+                    //Unable Alt Buttons
+                    btnPosition.Enabled = false;
+                    btnVelocity.Enabled = false;
+                    btnTorque.Enabled = false;
 
                 }
                 catch (Exception ex)
