@@ -426,7 +426,7 @@ namespace Tritex_ModBus
                     //Activates the move
                     modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
                     modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
-                    lbClientStatus.Text = "Alt Position written";
+                    lbClientStatus.Text = "Writing Position!";
                     btnAlt.BackColor = Color.DarkOrange;
                     btnAlt.Text = "STOP";
 
@@ -449,7 +449,7 @@ namespace Tritex_ModBus
                     //Stop the alternate mode
                     modbusTcpClient1.WriteSingleRegister(0x00, 5107, 0);
                     modbusTcpClient2.WriteSingleRegister(0x00, 5107, 0);
-                    lbClientStatus.Text = "Stopped Alt Position move";
+                    lbClientStatus.Text = "Stopped Position move";
                     btnAlt.BackColor = Color.White;
                     btnAlt.Text = "Position";
 
