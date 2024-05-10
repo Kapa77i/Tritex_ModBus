@@ -363,7 +363,7 @@ namespace Tritex_ModBus
         /*For this code, I have used the Tritex software to set these basic limits and I am only sending the execute commands 
          via this code using the Generic Driver profile that I have set up directly on the Tritex software.*/
 
-        //Enabling Alternate Mode with IEG_MOTION by sending channel 4316 value 128 (Tritex parameter manual page 77)
+        //Enabling Alternate Mode with IEG_MODE by sending channel 4316 value 128 (Tritex parameter manual page 77)
         private void btnAlt_Click(object sender, EventArgs e)
         {
             if (btnAlt.Text == "Alternate Mode")
@@ -394,9 +394,9 @@ namespace Tritex_ModBus
                 try
                 {
                     //Stop the alternate mode
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4318, 0);
-                    modbusTcpClient2.WriteSingleRegister(0x00, 4318, 0);
-                    lbClientStatus.Text = "Write the 'stop the move' succesfully";
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4316, 0);
+                    lbClientStatus.Text = "Alt mode turned off succesfully";
                     btnAlt.BackColor = Color.White;
                     btnAlt.Text = "Alternate Mode";
 
@@ -408,6 +408,62 @@ namespace Tritex_ModBus
                 }
             }
         }
+
+
+        //Activate movement
+        //Register no. 5107, Name: AltCommandMode, Value 2 (Analog Position), Tritex Parameter Manual page 95
+        //Another option?
+        //Register no. 7188, Name: Alt_Position, Value ??? 2 ??? (Analog Position), Tritex Parameter Manual page 102
+        /*This works in away that you set the amount og movement EITHER in the Tritex Software Directely or by the separate commands.
+         When you have stated the limits of the movement (E.g. Minimum 0.00 REVS and Maximum 6.00 REVS) you will send the activation
+        signal here, the movement will continue until you click the button again, which will signal end of the movement. */
+        private void btnPosition_Click(object sender, EventArgs e)
+        {
+            if (btnAlt.Text == "Alternate Mode")
+            {
+                try
+                {
+                    //Activates the move
+                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
+                    lbClientStatus.Text = "Alt Position written";
+                    btnAlt.BackColor = Color.DarkOrange;
+                    btnAlt.Text = "STOP";
+
+                    //Enable Alt Buttons
+                    btnPosition.Enabled = true;
+                    btnVelocity.Enabled = true;
+                    btnTorque.Enabled = true;
+
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
+            }
+            else if (btnAlt.Text == "STOP Alt Mode")
+            {
+                try
+                {
+                    //Stop the alternate mode
+                    modbusTcpClient1.WriteSingleRegister(0x00, 5107, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 5107, 0);
+                    lbClientStatus.Text = "Stopped Alt Position move";
+                    btnAlt.BackColor = Color.White;
+                    btnAlt.Text = "Position";
+
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
+            }
+        }
+
+
+
 
 
 

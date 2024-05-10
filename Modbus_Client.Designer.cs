@@ -315,6 +315,7 @@
             this.btnPosition.TabIndex = 10;
             this.btnPosition.Text = "Position";
             this.btnPosition.UseVisualStyleBackColor = false;
+            this.btnPosition.Click += new System.EventHandler(this.btnPosition_Click);
             // 
             // btnTorque
             // 
