@@ -318,6 +318,7 @@ namespace Tritex_ModBus
          via this code using the Generic Driver profile that I have set up directly on the Tritex software.*/
 
         //Enabling Alternate Mode with IEG_MODE by sending channel 4316 value 128 (Tritex parameter manual page 77)
+        //Enables it, but also puts the machine on break (disabled) - why? 
         private void btnAlt_Click(object sender, EventArgs e)
         {
             if (btnAlt.Text == "Alternate Mode")
@@ -325,8 +326,8 @@ namespace Tritex_ModBus
                 try
                 {
                     //IED_MODE Enable Maintained value 2
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 1);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 1);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
 
                     //IEG_MODE Alt Mode value 4, 8, 16, or 32
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
