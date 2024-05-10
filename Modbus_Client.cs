@@ -51,7 +51,8 @@ namespace Tritex_ModBus
 
                     //Enable Movement command button available after succesful connection
                     btnEnable.Enabled = true;
-     
+                    btnAlt.Enabled = true;
+
                 }
                 catch (Exception ex)
                 {
