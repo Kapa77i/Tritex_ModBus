@@ -34,9 +34,6 @@ namespace Tritex_ModBus
             modbusTcpClient1 = new ModbusTcpClient();
             modbusTcpClient2 = new ModbusTcpClient();
 
-            //new IPEndPoint(IPAddress.Parse(tbM1.Text), int.Parse(tbPort.Text));
-            //new IPEndPoint(IPAddress.Parse(tbM`2.Text), int.Parse(tbPort.Text));
-
             if (btnConnect.Text == "Connect")
             {
                 try
@@ -75,13 +72,16 @@ namespace Tritex_ModBus
 
                     //Make buttons unavailable
                     btnEnable.Enabled = false;
+                    btnAlt.Enabled = false;
                     btnStop.Enabled = false;
                     btnJogPlus.Enabled = false;
                     btnJogMinus.Enabled = false;
                     btnGoHome.Enabled = false;
                     btnMove1.Enabled = false;
-                    btnMove2.Enabled = false;
-                    btnMove1Terminate.Enabled = false;
+                    btnPosition.Enabled = false;
+                    btnTorque.Enabled = false;
+                    btnVelocity.Enabled = false;
+                    
 
                 }
                 catch (Exception ex)
@@ -119,8 +119,6 @@ namespace Tritex_ModBus
                 btnJogMinus.Enabled = true;
                 btnGoHome.Enabled = true;
                 btnMove1.Enabled = true;
-                btnMove2.Enabled = true;
-                btnMove1Terminate.Enabled = true;
 
             }
             catch (Exception ex)
@@ -306,50 +304,6 @@ namespace Tritex_ModBus
                 }
             }
           
-        }
-
-        //IEG_MOVE_SWITCH
-        //This function terminate the Move command in IEG_LEVEL
-        private void btnMove1Terminate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ////Does not terminate the move - why?
-                //modbusTcpClient1.WriteSingleRegister(0x00, 4322, 2);
-                //modbusTcpClient2.WriteSingleRegister(0x00, 4322, 2);
-                ////For move 2
-                //modbusTcpClient1.WriteSingleRegister(0x00, 4322, 4);
-                //modbusTcpClient2.WriteSingleRegister(0x00, 4322, 4);
-                //How about if we make it as a 0?
-                modbusTcpClient1.WriteSingleRegister(0x00, 4322, 0);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4322, 0);
-                lbClientStatus.Text = "Write succesful!";
-
-            }
-            catch (Exception ex)
-            {
-
-                lbClientStatus.Text = "Error when writing! " + ex.ToString();
-            }
-        }
-
-        //This is only available when the actuator is se to Momentary (channel 4316?)
-        //Move to the edge
-        private void btnMove2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 4096);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 4096);
-                lbClientStatus.Text = "Write succesful!";
-
-            }
-            catch (Exception ex)
-            {
-
-                lbClientStatus.Text = "Error when writing! " + ex.ToString();
-            }
         }
 
 

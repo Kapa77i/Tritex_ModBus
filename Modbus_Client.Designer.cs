@@ -43,14 +43,12 @@
             this.tbM1 = new System.Windows.Forms.TextBox();
             this.tbM2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnMove1Terminate = new System.Windows.Forms.Button();
-            this.btnMove2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnAlt = new System.Windows.Forms.Button();
-            this.btnVelocity = new System.Windows.Forms.Button();
-            this.btnPosition = new System.Windows.Forms.Button();
             this.btnTorque = new System.Windows.Forms.Button();
+            this.btnPosition = new System.Windows.Forms.Button();
+            this.btnVelocity = new System.Windows.Forms.Button();
+            this.btnAlt = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -203,61 +201,33 @@
             // tbM1
             // 
             this.tbM1.Enabled = false;
-            this.tbM1.Location = new System.Drawing.Point(172, 23);
+            this.tbM1.Location = new System.Drawing.Point(172, 29);
             this.tbM1.Margin = new System.Windows.Forms.Padding(4);
             this.tbM1.Name = "tbM1";
-            this.tbM1.Size = new System.Drawing.Size(132, 22);
+            this.tbM1.Size = new System.Drawing.Size(92, 22);
             this.tbM1.TabIndex = 17;
             this.tbM1.Text = "192.168.0.211";
             // 
             // tbM2
             // 
             this.tbM2.Enabled = false;
-            this.tbM2.Location = new System.Drawing.Point(325, 23);
+            this.tbM2.Location = new System.Drawing.Point(277, 29);
             this.tbM2.Margin = new System.Windows.Forms.Padding(4);
             this.tbM2.Name = "tbM2";
-            this.tbM2.Size = new System.Drawing.Size(132, 22);
+            this.tbM2.Size = new System.Drawing.Size(90, 22);
             this.tbM2.TabIndex = 18;
             this.tbM2.Text = "192.168.0.212";
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnMove1Terminate);
-            this.panel3.Controls.Add(this.btnMove2);
             this.panel3.Controls.Add(this.btnMove1);
             this.panel3.Controls.Add(this.btnJogPlus);
             this.panel3.Controls.Add(this.btnJogMinus);
             this.panel3.Location = new System.Drawing.Point(221, 19);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(351, 270);
+            this.panel3.Size = new System.Drawing.Size(334, 192);
             this.panel3.TabIndex = 19;
-            // 
-            // btnMove1Terminate
-            // 
-            this.btnMove1Terminate.BackColor = System.Drawing.Color.White;
-            this.btnMove1Terminate.Enabled = false;
-            this.btnMove1Terminate.Location = new System.Drawing.Point(32, 185);
-            this.btnMove1Terminate.Margin = new System.Windows.Forms.Padding(4);
-            this.btnMove1Terminate.Name = "btnMove1Terminate";
-            this.btnMove1Terminate.Size = new System.Drawing.Size(131, 60);
-            this.btnMove1Terminate.TabIndex = 14;
-            this.btnMove1Terminate.Text = "End Move Lvl";
-            this.btnMove1Terminate.UseVisualStyleBackColor = false;
-            this.btnMove1Terminate.Click += new System.EventHandler(this.btnMove1Terminate_Click);
-            // 
-            // btnMove2
-            // 
-            this.btnMove2.BackColor = System.Drawing.Color.White;
-            this.btnMove2.Enabled = false;
-            this.btnMove2.Location = new System.Drawing.Point(171, 105);
-            this.btnMove2.Margin = new System.Windows.Forms.Padding(4);
-            this.btnMove2.Name = "btnMove2";
-            this.btnMove2.Size = new System.Drawing.Size(131, 60);
-            this.btnMove2.TabIndex = 13;
-            this.btnMove2.Text = "Move Edge Initiate";
-            this.btnMove2.UseVisualStyleBackColor = false;
-            this.btnMove2.Click += new System.EventHandler(this.btnMove2_Click);
             // 
             // panel2
             // 
@@ -265,7 +235,7 @@
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Location = new System.Drawing.Point(12, 204);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(596, 315);
+            this.panel2.Size = new System.Drawing.Size(584, 315);
             this.panel2.TabIndex = 20;
             // 
             // panel4
@@ -276,33 +246,20 @@
             this.panel4.Controls.Add(this.btnAlt);
             this.panel4.Location = new System.Drawing.Point(667, 201);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(586, 317);
+            this.panel4.Size = new System.Drawing.Size(398, 259);
             this.panel4.TabIndex = 21;
             // 
-            // btnAlt
+            // btnTorque
             // 
-            this.btnAlt.BackColor = System.Drawing.Color.White;
-            this.btnAlt.Enabled = false;
-            this.btnAlt.Location = new System.Drawing.Point(33, 22);
-            this.btnAlt.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAlt.Name = "btnAlt";
-            this.btnAlt.Size = new System.Drawing.Size(131, 60);
-            this.btnAlt.TabIndex = 8;
-            this.btnAlt.Text = "Alternate Mode";
-            this.btnAlt.UseVisualStyleBackColor = false;
-            this.btnAlt.Click += new System.EventHandler(this.btnAlt_Click);
-            // 
-            // btnVelocity
-            // 
-            this.btnVelocity.BackColor = System.Drawing.Color.White;
-            this.btnVelocity.Enabled = false;
-            this.btnVelocity.Location = new System.Drawing.Point(228, 99);
-            this.btnVelocity.Margin = new System.Windows.Forms.Padding(4);
-            this.btnVelocity.Name = "btnVelocity";
-            this.btnVelocity.Size = new System.Drawing.Size(131, 60);
-            this.btnVelocity.TabIndex = 9;
-            this.btnVelocity.Text = "Velocity";
-            this.btnVelocity.UseVisualStyleBackColor = false;
+            this.btnTorque.BackColor = System.Drawing.Color.White;
+            this.btnTorque.Enabled = false;
+            this.btnTorque.Location = new System.Drawing.Point(228, 177);
+            this.btnTorque.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTorque.Name = "btnTorque";
+            this.btnTorque.Size = new System.Drawing.Size(131, 60);
+            this.btnTorque.TabIndex = 11;
+            this.btnTorque.Text = "Torque";
+            this.btnTorque.UseVisualStyleBackColor = false;
             // 
             // btnPosition
             // 
@@ -317,17 +274,30 @@
             this.btnPosition.UseVisualStyleBackColor = false;
             this.btnPosition.Click += new System.EventHandler(this.btnPosition_Click);
             // 
-            // btnTorque
+            // btnVelocity
             // 
-            this.btnTorque.BackColor = System.Drawing.Color.White;
-            this.btnTorque.Enabled = false;
-            this.btnTorque.Location = new System.Drawing.Point(228, 177);
-            this.btnTorque.Margin = new System.Windows.Forms.Padding(4);
-            this.btnTorque.Name = "btnTorque";
-            this.btnTorque.Size = new System.Drawing.Size(131, 60);
-            this.btnTorque.TabIndex = 11;
-            this.btnTorque.Text = "Torque";
-            this.btnTorque.UseVisualStyleBackColor = false;
+            this.btnVelocity.BackColor = System.Drawing.Color.White;
+            this.btnVelocity.Enabled = false;
+            this.btnVelocity.Location = new System.Drawing.Point(228, 99);
+            this.btnVelocity.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVelocity.Name = "btnVelocity";
+            this.btnVelocity.Size = new System.Drawing.Size(131, 60);
+            this.btnVelocity.TabIndex = 9;
+            this.btnVelocity.Text = "Velocity";
+            this.btnVelocity.UseVisualStyleBackColor = false;
+            // 
+            // btnAlt
+            // 
+            this.btnAlt.BackColor = System.Drawing.Color.White;
+            this.btnAlt.Enabled = false;
+            this.btnAlt.Location = new System.Drawing.Point(33, 22);
+            this.btnAlt.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAlt.Name = "btnAlt";
+            this.btnAlt.Size = new System.Drawing.Size(131, 60);
+            this.btnAlt.TabIndex = 8;
+            this.btnAlt.Text = "Alternate Mode";
+            this.btnAlt.UseVisualStyleBackColor = false;
+            this.btnAlt.Click += new System.EventHandler(this.btnAlt_Click);
             // 
             // Modbus_Client
             // 
@@ -374,8 +344,6 @@
         private System.Windows.Forms.TextBox tbM2;
         private System.Windows.Forms.Button btnMove1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button btnMove2;
-        private System.Windows.Forms.Button btnMove1Terminate;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnTorque;
