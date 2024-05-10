@@ -371,10 +371,10 @@ namespace Tritex_ModBus
                 try
                 {
                     //IED_MODE Enable Maintained value 2
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 1);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 1);
 
-                    //IEG_MODE Alt Mode value 128
+                    //IEG_MODE Alt Mode value 4, 8, 16, or 32
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
                     lbClientStatus.Text = "Write succesful, Alternate Mode Engaged";
