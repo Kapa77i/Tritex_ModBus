@@ -100,12 +100,12 @@ namespace Tritex_ModBus
             {
                 Console.WriteLine(modbusTcpClient1.IsConnected.ToString());
                 Console.WriteLine(modbusTcpClient2.IsConnected.ToString());
-                //IEG_MODE, enable
+                //IEG_MOTION, enable
                 modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2);
                 modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2);
 
 
-                //IEG_MODE, Fault reset
+                //IEG_MOTIION, Fault reset
                // modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
                // modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
                 lbClientStatus.Text = "Write succesful!";
@@ -370,7 +370,11 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    //Activates the move
+                    //IED_MODE Enable Maintained value 2
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
+
+                    //IEG_MODE Alt Mode value 128
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
                     lbClientStatus.Text = "Write succesful, Alternate Mode Engaged";
