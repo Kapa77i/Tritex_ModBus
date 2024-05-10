@@ -428,14 +428,14 @@ namespace Tritex_ModBus
         signal here, the movement will continue until you click the button again, which will signal end of the movement. */
         private void btnPosition_Click(object sender, EventArgs e)
         {
-            if (btnPosition.Text == "Alternate Mode")
+            if (btnPosition.Text == "Position")
             {
                 try
                 {
                     //Activates the move
                     modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
                     modbusTcpClient1.WriteSingleRegister(0x00, 5107, 2);
-                    lbClientStatus.Text = " Writing Position!";
+                    lbClientStatus.Text = "Writing Position!";
                     btnPosition.BackColor = Color.DarkOrange;
                     btnPosition.Text = "STOP";
 
@@ -446,7 +446,7 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
             }
-            else if (btnPosition.Text == "STOP Alt Mode")
+            else if (btnPosition.Text == "STOP")
             {
                 try
                 {
