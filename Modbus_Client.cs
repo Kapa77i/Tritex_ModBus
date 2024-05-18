@@ -40,8 +40,13 @@ namespace Tritex_ModBus
                 try
                 {
                     //Changed this from BigEndian to Little (CHECK THIS IF THERE IS ANY ISSUES!!)
-                    modbusTcpClient1.Connect((IPAddress.Parse(tbM1.Text)), ModbusEndianness.BigEndian);
-                    modbusTcpClient2.Connect((IPAddress.Parse(tbM2.Text)), ModbusEndianness.BigEndian);
+                    modbusTcpClient1.Connect(IPAddress.Parse(tbM1.Text), ModbusEndianness.BigEndian);
+                    modbusTcpClient2.Connect(IPAddress.Parse(tbM2.Text), ModbusEndianness.BigEndian);
+
+                   //var data = modbusTcpClient1.ReadHoldingRegisters<float>(0x00, 4317, 15);
+                    //modbusTcpClient1.ReadInputRegisters(0x00, 4316, 15);
+
+
                     Console.WriteLine("Both engines connected");
                     lbClientStatus.Text = "Client Connection: Connected!";
                     btnConnect.Text = "Disconnect";
@@ -73,6 +78,19 @@ namespace Tritex_ModBus
                     btnConnect.BackColor = Color.White;
 
                     //Make buttons unavailable
+                    if(btnEnable.Text == "Move Enabled!")
+                    {
+                        lbClientStatus.Text = "Disabled Enable Move!";
+                        btnEnable.Text = "Enable Move";
+                        btnEnable.BackColor = Color.White;
+                    }
+
+                    if (btnAlt.Text == "STOP Alt Mode")
+                    {
+                        lbClientStatus.Text = "Alt mode turned off succesfully";
+                        btnAlt.BackColor = Color.White;
+                        btnAlt.Text = "Alternate Mode";
+                    }
                     btnEnable.Enabled = false;
                     btnAlt.Enabled = false;
                     btnStop.Enabled = false;
@@ -296,7 +314,7 @@ namespace Tritex_ModBus
         //IEG_MOVE_LEVEL = move to Move 2 parameter.
         private void btnMove1_Click(object sender, EventArgs e)
         {
-            if (btnMove1.Text == "Move Lvl Initiate")
+            if (btnMove1.Text == "Move 2")
             {
                 try
                 {
@@ -330,7 +348,7 @@ namespace Tritex_ModBus
                     modbusTcpClient2.WriteSingleRegister(0x00, 4318, 0);
                     lbClientStatus.Text = "Write the 'stop the move' succesfully";
                     btnMove1.BackColor = Color.White;
-                    btnMove1.Text = "Move Lvl Initiate";
+                    btnMove1.Text = "Move 2";
 
                     //Possibille IEG_MOTION command? Comment stuff above when testing this
                     //modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
