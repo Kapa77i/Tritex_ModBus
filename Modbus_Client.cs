@@ -189,33 +189,79 @@ namespace Tritex_ModBus
         //Stop any and all movement
         private void btnStop_Click(object sender, EventArgs e)
         {
-            try
+            if (btnStop.Text == "STOP Move")
             {
-                //STOP movement, IEG_MOTION
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 4);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 4);
-                lbClientStatus.Text = "Write succesful!";
+                try
+                {
+                    //STOP movement, IEG_MOTION
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 4);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 4);
+                    lbClientStatus.Text = "Write succesful!";
+                    btnStop.Text = "STOPPED";
+                    btnStop.BackColor = Color.DarkOrange;
+                }
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "ERROR! " + ex.ToString();
+                }
+
             }
-            catch (Exception ex)
+
+            else if (btnStop.Text == "STOPPED")
             {
-                lbClientStatus.Text = "ERROR! " + ex.ToString();
+                try
+                {
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
+                    lbClientStatus.Text = "Write succesful!";
+                    btnStop.Text = "STOP Move";
+                    btnStop.BackColor = Color.White;
+                }
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "ERROR! " + ex.ToString();
+                }
             }
+          
         }
 
 
         //Go to Home position, IEG_MOTION
         private void btnGoHome_Click(object sender, EventArgs e)
         {
-            try
+            if (btnGoHome.Text == "Go Home")
             {
-                modbusTcpClient1.WriteSingleRegister(0x00, 4317, 256);
-                modbusTcpClient2.WriteSingleRegister(0x00, 4317, 256);
-                lbClientStatus.Text = "Write succesful!";
+                try
+                {
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 256);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 256);
+                    lbClientStatus.Text = "Write succesful!";
+                    btnGoHome.Text = "Homing";
+                    btnGoHome.BackColor = Color.DarkOrange;
+
+                }
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "ERROR! " + ex.ToString();
+                }
             }
-            catch (Exception ex)
+            else if (btnGoHome.Text == "Homing")
             {
-                lbClientStatus.Text = "ERROR! " + ex.ToString();
+                try
+                {
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4317, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
+                    lbClientStatus.Text = "Write succesful!";
+                    btnGoHome.Text = "Go Home";
+                    btnGoHome.BackColor = Color.White;
+                }
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "ERROR! " + ex.ToString();
+                }
             }
+
+           
         }
 
         /*FOLLOWING CODE IS TO JUST SHOWCASE THAT THE JOGS AND MOVEMENT COMMANDS WORK*/
