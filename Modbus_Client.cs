@@ -80,14 +80,12 @@ namespace Tritex_ModBus
                     //Make buttons unavailable
                     if(btnEnable.Text == "Move Enabled!")
                     {
-                        lbClientStatus.Text = "Disabled Enable Move!";
                         btnEnable.Text = "Enable Move";
                         btnEnable.BackColor = Color.White;
                     }
 
                     if (btnAlt.Text == "STOP Alt Mode")
                     {
-                        lbClientStatus.Text = "Alt mode turned off succesfully";
                         btnAlt.BackColor = Color.White;
                         btnAlt.Text = "Alternate Mode";
                     }
@@ -101,8 +99,6 @@ namespace Tritex_ModBus
                     btnPosition.Enabled = false;
                     btnTorque.Enabled = false;
                     btnVelocity.Enabled = false;
-                    
-
                 }
                 catch (Exception ex)
                 {
