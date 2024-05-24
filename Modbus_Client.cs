@@ -12,6 +12,7 @@ using FluentModbus;
 using EasyModbus;
 using System.Runtime.InteropServices;
 using System.Diagnostics.Eventing.Reader;
+using System.Data.SqlTypes;
 
 // https://apollo3zehn.github.io/FluentModbus/
 
@@ -23,6 +24,8 @@ namespace Tritex_ModBus
         ModbusTcpClient modbusTcpClient;
         ModbusTcpClient modbusTcpClient1;
         ModbusTcpClient modbusTcpClient2;
+
+        ModbusTcpServer modbusTcpServer;
 
         public Modbus_Client()
         {
@@ -54,6 +57,7 @@ namespace Tritex_ModBus
 
                     //Enable Movement command button available after succesful connection
                     btnEnable.Enabled = true;
+                    btnIEG_MOD.Enabled = true;
                     btnAlt.Enabled = true;
                     btnGoHome.Enabled = true;
 
@@ -90,6 +94,7 @@ namespace Tritex_ModBus
                         btnAlt.Text = "Alternate Mode";
                     }
                     btnEnable.Enabled = false;
+                    btnIEG_MOD.Enabled= false;
                     btnAlt.Enabled = false;
                     btnStop.Enabled = false;
                     btnJogPlus.Enabled = false;
@@ -97,8 +102,6 @@ namespace Tritex_ModBus
                     btnGoHome.Enabled = false;
                     btnMove1.Enabled = false;
                     btnPosition.Enabled = false;
-                    btnTorque.Enabled = false;
-                    btnVelocity.Enabled = false;
                 }
                 catch (Exception ex)
                 {
@@ -111,7 +114,7 @@ namespace Tritex_ModBus
         //Enable the movement first, always!
         private void btnEnable_Click(object sender, EventArgs e)
         {
-            if (btnEnable.Text == "Enable Move")
+            if (btnEnable.Text == "Enable IEG_MOT")
             {
                 try
                 {
@@ -132,11 +135,19 @@ namespace Tritex_ModBus
                     btnJogMinus.Enabled = true;
                     //btnGoHome.Enabled = true;
                     btnMove1.Enabled = true;
+                    btnMove3.Enabled = true;
 
                     //Disable Alt mode
                     btnAlt.Enabled = false;
 
+                    //var isEnabled = modbusTcpClient1.ReadInputRegisters(0x00, 104, 0);
 
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int32>(0x00, 111, 15).ToArray();
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status START OEG: " + item.ToString());
+                    }
+                        
                 }
                 catch (Exception ex)
                 {
@@ -149,7 +160,6 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    
                     //IEG_MOTION, Fault reset
                      modbusTcpClient1.WriteSingleRegister(0x00, 4317, 65535);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4317, 65535);
@@ -159,7 +169,7 @@ namespace Tritex_ModBus
                     modbusTcpClient2.WriteSingleRegister(0x00, 4317, 0);
 
                     lbClientStatus.Text = "Disabled Enable Move!";
-                    btnEnable.Text = "Enable Move";
+                    btnEnable.Text = "Enable IEG_MOT";
                     btnEnable.BackColor = Color.White;
 
                     //Allow the Stop, Home, Jogs and Move command buttons
@@ -168,9 +178,15 @@ namespace Tritex_ModBus
                     btnJogMinus.Enabled = false;
                    // btnGoHome.Enabled = false;
                     btnMove1.Enabled = false;
+                    btnMove3.Enabled = false;
 
                     //Able Alt mode
                     btnAlt.Enabled = true;
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int32>(0x00, 111, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status END OEG: " + item.ToString());
+                    }
 
                 }
 
@@ -180,7 +196,85 @@ namespace Tritex_ModBus
                 }
             }  
         }
-           
+
+        private void btnIEG_MOD_Click(object sender, EventArgs e)
+        {
+            if (btnIEG_MOD.Text == "Enable IEG_MOD")
+            {
+                try
+                {
+                    //IEG_MODE, Fault reset
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4316, 65535);
+
+                    //IEG_MODE, enable
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 1);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4316, 1);
+                    lbClientStatus.Text = "Enable (Momentary) activated!";
+                    btnIEG_MOD.Text = "Move Enabled!";
+                    btnIEG_MOD.BackColor = Color.DarkOrange;
+
+                    //Allow the Stop, Home, Jogs and Move command buttons
+                    btnStop.Enabled = true;
+                    btnJogPlus.Enabled = true;
+                    btnJogMinus.Enabled = true;
+                    //btnGoHome.Enabled = true;
+                    btnMove1.Enabled = true;
+                    btnMove3.Enabled = true;
+                    btnAlt.Enabled = true;
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status IEG_MOD START OEG: " + item.ToString());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "ERROR! " + ex.ToString();
+                }
+            }
+
+
+            else if (btnIEG_MOD.Text == "Move Enabled!")
+            {
+                try
+                {
+                    //IEG_MOTION, Fault reset
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4316, 65535);
+
+                    //IEG_MOTION, enable
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4316, 0);
+
+                    lbClientStatus.Text = "Disabled Enable Move!";
+                    btnIEG_MOD.Text = "Enable IEG_MOD";
+                    btnIEG_MOD.BackColor = Color.White;
+
+                    //Allow the Stop, Home, Jogs and Move command buttons
+                    btnStop.Enabled = false;
+                    btnJogPlus.Enabled = false;
+                    btnJogMinus.Enabled = false;
+                    // btnGoHome.Enabled = false;
+                    btnMove1.Enabled = false;
+                    btnMove3.Enabled = false;
+                    btnAlt.Enabled = false;
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status IEG_MOD END OEG: " + item.ToString());
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "ERROR! " + ex.ToString();
+                }
+            }
+        }
+
 
         //Stop any and all movement
         private void btnStop_Click(object sender, EventArgs e)
@@ -345,34 +439,29 @@ namespace Tritex_ModBus
         }
 
         //MOVE
-        //It uses different channel (4318) and it calls out the mapped movements in the Tritex (Move 0 - 15).
-        //You can map these commands in Tritex beforehand, set all the needed parameters for upper and lower limits
-        //and then just call the channel to execute the command.
-        /*You can also use the Modbus Mapping tool, map the neede parameters beforehand and then just call them, but 
+        //Move commands uses different channel (4318) and it calls out the mapped movements in the Tritex (Move 0 - 15).
+        /*You can map these commands in Tritex beforehand, set all the needed parameters for upper and lower limits
+        and then just call the channel to execute the command.*/
+        /*CTo initiate different Move functions you need to sent the following 
+         value to the Channel 4318: Move 0 = 1, Move 1 = 2, Move 2 = 4, Move 3 = 8, Move 4 = 16, Move 5 = 32, etc. */
+        /*You can also use the Modbus Mapping tool, map the needde parameters beforehand and then just call them, but 
          by the time of writing this code, I have not yet checked that closely. Checking from the manual, it should follow
         the same procedure as above. If you want to set the parameters outside Tritex, you need to call separate channels before hand
         to set the parameters and then send the execution command of the wanted movement. */
 
         //IEG_MOVE_LEVEL = move to Move 2 parameter.
+        //Channel 4318, send value 4. 
         private void btnMove1_Click(object sender, EventArgs e)
         {
             if (btnMove1.Text == "Move 2")
             {
                 try
                 {
-                    //Activates the move
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4318, 2);
-                    modbusTcpClient2.WriteSingleRegister(0x00, 4318, 2);
-                    lbClientStatus.Text = "IEG_MOTION_LEVEL succesful!";
                     modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
-                    lbClientStatus.Text = "Write succesful to Move2!";
+                    lbClientStatus.Text = "Wrote succesful to Move2!";
                     btnMove1.BackColor = Color.DarkOrange;
                     btnMove1.Text = "STOP Move";
-
-                    //Possibille IEG_MOTION command? Comment stuff above when testing this
-                    //modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
-                    //modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
 
                 }
                 catch (Exception ex)
@@ -385,16 +474,11 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    //Stop the move?
                     modbusTcpClient1.WriteSingleRegister(0x00, 4318, 0);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4318, 0);
-                    lbClientStatus.Text = "Write the 'stop the move' succesfully";
+                    lbClientStatus.Text = "Wrote the 'stop the move' succesfully";
                     btnMove1.BackColor = Color.White;
                     btnMove1.Text = "Move 2";
-
-                    //Possibille IEG_MOTION command? Comment stuff above when testing this
-                    //modbusTcpClient1.WriteSingleRegister(0x00, 4317, 2048);
-                    //modbusTcpClient2.WriteSingleRegister(0x00, 4317, 2048);
 
                 }
                 catch (Exception ex)
@@ -404,6 +488,44 @@ namespace Tritex_ModBus
                 }
             }
           
+        }
+
+
+
+        private void btnMove3_Click(object sender, EventArgs e)
+        {
+            if (btnMove3.Text == "Move 3")
+            {
+                try
+                {
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4318, 8);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4318, 8);
+                    lbClientStatus.Text = "Write succesful to Move2!";
+                    btnMove3.BackColor = Color.DarkOrange;
+                    btnMove3.Text = "STOP Move";
+
+                }
+                catch (Exception ex)
+                {
+
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
+            }
+            else if (btnMove3.Text == "STOP Move")
+            {
+                try
+                {
+                    modbusTcpClient1.WriteSingleRegister(0x00, 4318, 0);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4318, 0);
+                    lbClientStatus.Text = "Wrote the 'stop the move' succesfully";
+                    btnMove3.BackColor = Color.White;
+                    btnMove3.Text = "Move 3";
+                }
+                catch (Exception ex)
+                {
+                    lbClientStatus.Text = "Error when writing! " + ex.ToString();
+                }
+            }
         }
 
 
@@ -418,7 +540,6 @@ namespace Tritex_ModBus
          via this code using the Generic Driver profile that I have set up directly on the Tritex software.*/
 
         //Enabling Alternate Mode with IEG_MODE by sending channel 4316 value 128 (Tritex parameter manual page 77)
-        //Enables it, but also puts the machine on break (disabled) - why? 
         //Added manual override
         private void btnAlt_Click(object sender, EventArgs e)
         {
@@ -426,33 +547,25 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    //IEG_MODE Reset Value 65535
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 65535);
-
-                    //IEG_MODE Enable Maintained value 2
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 2);
-
                     //IEG_MODE Alt Mode value 128
                     modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
-                    modbusTcpClient1.WriteSingleRegister(0x00, 4316, 128);
+                    modbusTcpClient2.WriteSingleRegister(0x00, 4316, 128);
                     lbClientStatus.Text = "Write succesful, Alternate Mode Engaged";
                     btnAlt.BackColor = Color.DarkOrange;
                     btnAlt.Text = "STOP Alt Mode";
 
-                    ////IEG_MODE Break Override
-                    //modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
-                    //modbusTcpClient1.WriteSingleRegister(0x00, 4316, 32768);
-
                     //Enable Alt Buttons
                     btnBreak.Enabled = true;
                     btnPosition.Enabled = true;
-                    btnVelocity.Enabled = true;
-                    btnTorque.Enabled = true;
 
                     //Disable IEG_MOTION
                     btnEnable.Enabled = false;
+
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status ALT START OEG: " + item.ToString());
+                    }
 
                 }
                 catch (Exception ex)
@@ -475,11 +588,15 @@ namespace Tritex_ModBus
                     //Disable Alt Buttons
                     btnBreak.Enabled = false;
                     btnPosition.Enabled = false;
-                    btnVelocity.Enabled = false;
-                    btnTorque.Enabled = false;
 
                     //Enable IEG_MOTION
                     btnEnable.Enabled = true;
+
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status ALT END OEG: " + item.ToString());
+                    }
 
                 }
                 catch (Exception ex)
@@ -578,6 +695,10 @@ namespace Tritex_ModBus
                 }
             }
         }
+
+   
+
+
 
         //REad register code, needs to add the handler if used.
         //private void btnReadRegister_Click(object sender, EventArgs e)

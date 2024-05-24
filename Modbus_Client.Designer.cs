@@ -43,17 +43,19 @@
             this.tbM1 = new System.Windows.Forms.TextBox();
             this.tbM2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnMove3 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnTorque = new System.Windows.Forms.Button();
-            this.btnPosition = new System.Windows.Forms.Button();
-            this.btnVelocity = new System.Windows.Forms.Button();
-            this.btnAlt = new System.Windows.Forms.Button();
             this.btnBreak = new System.Windows.Forms.Button();
+            this.btnPosition = new System.Windows.Forms.Button();
+            this.btnAlt = new System.Windows.Forms.Button();
+            this.btnIEG_MOD = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lbM_Maintained = new System.Windows.Forms.Label();
+            this.lbM_Monetary = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbIP
@@ -89,7 +91,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(167, 103);
+            this.btnConnect.Location = new System.Drawing.Point(167, 106);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(147, 36);
@@ -103,7 +105,7 @@
             this.lbClientStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbClientStatus.AutoSize = true;
             this.lbClientStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbClientStatus.Location = new System.Drawing.Point(560, 9);
+            this.lbClientStatus.Location = new System.Drawing.Point(580, 17);
             this.lbClientStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbClientStatus.Name = "lbClientStatus";
             this.lbClientStatus.Size = new System.Drawing.Size(169, 24);
@@ -140,7 +142,7 @@
             // 
             this.btnGoHome.BackColor = System.Drawing.Color.White;
             this.btnGoHome.Enabled = false;
-            this.btnGoHome.Location = new System.Drawing.Point(28, 160);
+            this.btnGoHome.Location = new System.Drawing.Point(188, 21);
             this.btnGoHome.Margin = new System.Windows.Forms.Padding(4);
             this.btnGoHome.Name = "btnGoHome";
             this.btnGoHome.Size = new System.Drawing.Size(131, 60);
@@ -152,19 +154,18 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.btnStop);
-            this.panel1.Controls.Add(this.btnEnable);
             this.panel1.Controls.Add(this.btnGoHome);
-            this.panel1.Location = new System.Drawing.Point(26, 19);
+            this.panel1.Location = new System.Drawing.Point(105, 325);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(187, 251);
+            this.panel1.Size = new System.Drawing.Size(347, 103);
             this.panel1.TabIndex = 10;
             // 
             // btnStop
             // 
             this.btnStop.BackColor = System.Drawing.Color.White;
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(28, 87);
+            this.btnStop.Location = new System.Drawing.Point(26, 21);
             this.btnStop.Margin = new System.Windows.Forms.Padding(4);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(131, 60);
@@ -177,12 +178,12 @@
             // 
             this.btnEnable.BackColor = System.Drawing.Color.White;
             this.btnEnable.Enabled = false;
-            this.btnEnable.Location = new System.Drawing.Point(28, 16);
+            this.btnEnable.Location = new System.Drawing.Point(29, 19);
             this.btnEnable.Margin = new System.Windows.Forms.Padding(4);
             this.btnEnable.Name = "btnEnable";
             this.btnEnable.Size = new System.Drawing.Size(131, 60);
             this.btnEnable.TabIndex = 10;
-            this.btnEnable.Text = "Enable Move";
+            this.btnEnable.Text = "Enable IEG_MOT";
             this.btnEnable.UseVisualStyleBackColor = false;
             this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
             // 
@@ -221,91 +222,43 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnMove3);
             this.panel3.Controls.Add(this.btnMove1);
             this.panel3.Controls.Add(this.btnJogPlus);
             this.panel3.Controls.Add(this.btnJogMinus);
-            this.panel3.Location = new System.Drawing.Point(221, 19);
+            this.panel3.Location = new System.Drawing.Point(13, 432);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(334, 192);
             this.panel3.TabIndex = 19;
             // 
-            // panel2
+            // btnMove3
             // 
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.panel1);
-            this.panel2.Location = new System.Drawing.Point(12, 204);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(584, 315);
-            this.panel2.TabIndex = 20;
+            this.btnMove3.BackColor = System.Drawing.Color.White;
+            this.btnMove3.Enabled = false;
+            this.btnMove3.Location = new System.Drawing.Point(172, 105);
+            this.btnMove3.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMove3.Name = "btnMove3";
+            this.btnMove3.Size = new System.Drawing.Size(131, 60);
+            this.btnMove3.TabIndex = 13;
+            this.btnMove3.Text = "Move 3";
+            this.btnMove3.UseVisualStyleBackColor = false;
+            this.btnMove3.Click += new System.EventHandler(this.btnMove3_Click);
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.btnBreak);
-            this.panel4.Controls.Add(this.btnTorque);
             this.panel4.Controls.Add(this.btnPosition);
-            this.panel4.Controls.Add(this.btnVelocity);
-            this.panel4.Controls.Add(this.btnAlt);
-            this.panel4.Location = new System.Drawing.Point(667, 201);
+            this.panel4.Location = new System.Drawing.Point(369, 432);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(398, 259);
+            this.panel4.Size = new System.Drawing.Size(178, 201);
             this.panel4.TabIndex = 21;
-            // 
-            // btnTorque
-            // 
-            this.btnTorque.BackColor = System.Drawing.Color.White;
-            this.btnTorque.Enabled = false;
-            this.btnTorque.Location = new System.Drawing.Point(228, 177);
-            this.btnTorque.Margin = new System.Windows.Forms.Padding(4);
-            this.btnTorque.Name = "btnTorque";
-            this.btnTorque.Size = new System.Drawing.Size(131, 60);
-            this.btnTorque.TabIndex = 11;
-            this.btnTorque.Text = "Torque";
-            this.btnTorque.UseVisualStyleBackColor = false;
-            // 
-            // btnPosition
-            // 
-            this.btnPosition.BackColor = System.Drawing.Color.White;
-            this.btnPosition.Enabled = false;
-            this.btnPosition.Location = new System.Drawing.Point(228, 22);
-            this.btnPosition.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPosition.Name = "btnPosition";
-            this.btnPosition.Size = new System.Drawing.Size(131, 60);
-            this.btnPosition.TabIndex = 10;
-            this.btnPosition.Text = "Position";
-            this.btnPosition.UseVisualStyleBackColor = false;
-            this.btnPosition.Click += new System.EventHandler(this.btnPosition_Click);
-            // 
-            // btnVelocity
-            // 
-            this.btnVelocity.BackColor = System.Drawing.Color.White;
-            this.btnVelocity.Enabled = false;
-            this.btnVelocity.Location = new System.Drawing.Point(228, 99);
-            this.btnVelocity.Margin = new System.Windows.Forms.Padding(4);
-            this.btnVelocity.Name = "btnVelocity";
-            this.btnVelocity.Size = new System.Drawing.Size(131, 60);
-            this.btnVelocity.TabIndex = 9;
-            this.btnVelocity.Text = "Velocity";
-            this.btnVelocity.UseVisualStyleBackColor = false;
-            // 
-            // btnAlt
-            // 
-            this.btnAlt.BackColor = System.Drawing.Color.White;
-            this.btnAlt.Enabled = false;
-            this.btnAlt.Location = new System.Drawing.Point(33, 22);
-            this.btnAlt.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAlt.Name = "btnAlt";
-            this.btnAlt.Size = new System.Drawing.Size(131, 60);
-            this.btnAlt.TabIndex = 8;
-            this.btnAlt.Text = "Alternate Mode";
-            this.btnAlt.UseVisualStyleBackColor = false;
-            this.btnAlt.Click += new System.EventHandler(this.btnAlt_Click);
             // 
             // btnBreak
             // 
             this.btnBreak.BackColor = System.Drawing.Color.White;
             this.btnBreak.Enabled = false;
-            this.btnBreak.Location = new System.Drawing.Point(33, 127);
+            this.btnBreak.Location = new System.Drawing.Point(20, 105);
             this.btnBreak.Margin = new System.Windows.Forms.Padding(4);
             this.btnBreak.Name = "btnBreak";
             this.btnBreak.Size = new System.Drawing.Size(131, 60);
@@ -314,13 +267,84 @@
             this.btnBreak.UseVisualStyleBackColor = false;
             this.btnBreak.Click += new System.EventHandler(this.btnBreak_Click);
             // 
+            // btnPosition
+            // 
+            this.btnPosition.BackColor = System.Drawing.Color.White;
+            this.btnPosition.Enabled = false;
+            this.btnPosition.Location = new System.Drawing.Point(20, 25);
+            this.btnPosition.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPosition.Name = "btnPosition";
+            this.btnPosition.Size = new System.Drawing.Size(131, 60);
+            this.btnPosition.TabIndex = 10;
+            this.btnPosition.Text = "Position";
+            this.btnPosition.UseVisualStyleBackColor = false;
+            this.btnPosition.Click += new System.EventHandler(this.btnPosition_Click);
+            // 
+            // btnAlt
+            // 
+            this.btnAlt.BackColor = System.Drawing.Color.White;
+            this.btnAlt.Enabled = false;
+            this.btnAlt.Location = new System.Drawing.Point(357, 19);
+            this.btnAlt.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAlt.Name = "btnAlt";
+            this.btnAlt.Size = new System.Drawing.Size(131, 60);
+            this.btnAlt.TabIndex = 8;
+            this.btnAlt.Text = "Alternate Mode";
+            this.btnAlt.UseVisualStyleBackColor = false;
+            this.btnAlt.Click += new System.EventHandler(this.btnAlt_Click);
+            // 
+            // btnIEG_MOD
+            // 
+            this.btnIEG_MOD.BackColor = System.Drawing.Color.White;
+            this.btnIEG_MOD.Enabled = false;
+            this.btnIEG_MOD.Location = new System.Drawing.Point(168, 19);
+            this.btnIEG_MOD.Margin = new System.Windows.Forms.Padding(4);
+            this.btnIEG_MOD.Name = "btnIEG_MOD";
+            this.btnIEG_MOD.Size = new System.Drawing.Size(131, 60);
+            this.btnIEG_MOD.TabIndex = 12;
+            this.btnIEG_MOD.Text = "Enable IEG_MOD";
+            this.btnIEG_MOD.UseVisualStyleBackColor = false;
+            this.btnIEG_MOD.Click += new System.EventHandler(this.btnIEG_MOD_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.btnIEG_MOD);
+            this.panel5.Controls.Add(this.btnEnable);
+            this.panel5.Controls.Add(this.btnAlt);
+            this.panel5.Location = new System.Drawing.Point(12, 220);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(518, 101);
+            this.panel5.TabIndex = 22;
+            // 
+            // lbM_Maintained
+            // 
+            this.lbM_Maintained.AutoSize = true;
+            this.lbM_Maintained.Location = new System.Drawing.Point(657, 89);
+            this.lbM_Maintained.Name = "lbM_Maintained";
+            this.lbM_Maintained.Size = new System.Drawing.Size(110, 16);
+            this.lbM_Maintained.TabIndex = 23;
+            this.lbM_Maintained.Text = "Maintained Move";
+            // 
+            // lbM_Monetary
+            // 
+            this.lbM_Monetary.AutoSize = true;
+            this.lbM_Monetary.Location = new System.Drawing.Point(793, 89);
+            this.lbM_Monetary.Name = "lbM_Monetary";
+            this.lbM_Monetary.Size = new System.Drawing.Size(100, 16);
+            this.lbM_Monetary.TabIndex = 24;
+            this.lbM_Monetary.Text = "Monetary Move";
+            // 
             // Modbus_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1303, 746);
+            this.Controls.Add(this.lbM_Monetary);
+            this.Controls.Add(this.lbM_Maintained);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.tbM2);
             this.Controls.Add(this.tbM1);
             this.Controls.Add(this.lbClientStatus);
@@ -335,8 +359,8 @@
             this.Text = "Modbus_Client";
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,12 +383,14 @@
         private System.Windows.Forms.TextBox tbM2;
         private System.Windows.Forms.Button btnMove1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button btnTorque;
         private System.Windows.Forms.Button btnPosition;
-        private System.Windows.Forms.Button btnVelocity;
         private System.Windows.Forms.Button btnAlt;
         private System.Windows.Forms.Button btnBreak;
+        private System.Windows.Forms.Button btnMove3;
+        private System.Windows.Forms.Button btnIEG_MOD;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label lbM_Maintained;
+        private System.Windows.Forms.Label lbM_Monetary;
     }
 }
