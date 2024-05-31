@@ -59,7 +59,19 @@ namespace Tritex_ModBus
                     btnEnable.Enabled = true;
                     btnIEG_MOD.Enabled = true;
                     btnAlt.Enabled = true;
-                    btnGoHome.Enabled = true;
+                    //btnGoHome.Enabled = true;
+
+                    //do
+                    //{
+                    //    var isHoming = modbusTcpClient2.ReadInputRegisters<Int32>(0x00, 111, 15).ToArray();
+
+                    //    if (isHoming[6] == 130)
+                    //    {
+                    //        Console.WriteLine("Alt: " + isHoming[6].ToString());
+                    //        btnStatusAltMode.BackColor = Color.Red;
+                    //    }
+
+                    //} while (btnConnect.Text != "Connect");
 
                 }
                 catch (Exception ex)
@@ -84,7 +96,7 @@ namespace Tritex_ModBus
                     //Make buttons unavailable
                     if(btnEnable.Text == "Move Enabled!")
                     {
-                        btnEnable.Text = "Enable Move";
+                        btnEnable.Text = "Enable IEG_MOT";
                         btnEnable.BackColor = Color.White;
                     }
 
@@ -93,6 +105,14 @@ namespace Tritex_ModBus
                         btnAlt.BackColor = Color.White;
                         btnAlt.Text = "Alternate Mode";
                     }
+
+                    if (btnIEG_MOD.Text == "Move Enabled!")
+                    {
+                        btnIEG_MOD.Text = "Enable IEG_MOD";
+                        btnIEG_MOD.BackColor = Color.White;
+                    }
+
+
                     btnEnable.Enabled = false;
                     btnIEG_MOD.Enabled= false;
                     btnAlt.Enabled = false;
@@ -100,7 +120,8 @@ namespace Tritex_ModBus
                     btnJogPlus.Enabled = false;
                     btnJogMinus.Enabled = false;
                     btnGoHome.Enabled = false;
-                    btnMove1.Enabled = false;
+                    btnMove2.Enabled = false;
+                    btnMove3.Enabled = false;
                     btnPosition.Enabled = false;
                 }
                 catch (Exception ex)
@@ -133,12 +154,13 @@ namespace Tritex_ModBus
                     btnStop.Enabled = true;
                     btnJogPlus.Enabled = true;
                     btnJogMinus.Enabled = true;
-                    //btnGoHome.Enabled = true;
-                    btnMove1.Enabled = true;
+                    btnGoHome.Enabled = true;
+                    btnMove2.Enabled = true;
                     btnMove3.Enabled = true;
 
-                    //Disable Alt mode
-                    btnAlt.Enabled = false;
+                    //Disable Alt mode & Momentary mode?
+                   // btnAlt.Enabled = false;
+                    btnIEG_MOD.Enabled = false;
 
                     //var isEnabled = modbusTcpClient1.ReadInputRegisters(0x00, 104, 0);
 
@@ -176,12 +198,14 @@ namespace Tritex_ModBus
                     btnStop.Enabled = false;
                     btnJogPlus.Enabled = false;
                     btnJogMinus.Enabled = false;
-                   // btnGoHome.Enabled = false;
-                    btnMove1.Enabled = false;
+                   btnGoHome.Enabled = false;
+                    btnMove2.Enabled = false;
                     btnMove3.Enabled = false;
 
                     //Able Alt mode
-                    btnAlt.Enabled = true;
+                   // btnAlt.Enabled = true;
+                    btnIEG_MOD.Enabled = true;
+
                     var isHoming = modbusTcpClient2.ReadInputRegisters<Int32>(0x00, 111, 15);
                     foreach (var item in isHoming)
                     {
@@ -218,10 +242,14 @@ namespace Tritex_ModBus
                     btnStop.Enabled = true;
                     btnJogPlus.Enabled = true;
                     btnJogMinus.Enabled = true;
-                    //btnGoHome.Enabled = true;
-                    btnMove1.Enabled = true;
+                    btnGoHome.Enabled = true;
+                    btnMove2.Enabled = true;
                     btnMove3.Enabled = true;
-                    btnAlt.Enabled = true;
+                   // btnAlt.Enabled = true;
+
+                    //Disable
+                    btnEnable.Enabled = false;
+
                     var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
                     foreach (var item in isHoming)
                     {
@@ -256,10 +284,15 @@ namespace Tritex_ModBus
                     btnStop.Enabled = false;
                     btnJogPlus.Enabled = false;
                     btnJogMinus.Enabled = false;
-                    // btnGoHome.Enabled = false;
-                    btnMove1.Enabled = false;
+                    btnGoHome.Enabled = false;
+                    btnMove2.Enabled = false;
                     btnMove3.Enabled = false;
-                    btnAlt.Enabled = false;
+                   // btnAlt.Enabled = false;
+
+                    //Able
+                    btnEnable.Enabled = true;
+
+
                     var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
                     foreach (var item in isHoming)
                     {
@@ -328,6 +361,11 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Write succesful!";
                     btnGoHome.Text = "Homing";
                     btnGoHome.BackColor = Color.DarkOrange;
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Homing Start: " + item.ToString());
+                    }
 
                 }
                 catch (Exception ex)
@@ -344,6 +382,11 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Write succesful!";
                     btnGoHome.Text = "Go Home";
                     btnGoHome.BackColor = Color.White;
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Homing END: " + item.ToString());
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -369,7 +412,11 @@ namespace Tritex_ModBus
                     btnJogPlus.BackColor = Color.DarkOrange;
                     lbClientStatus.Text = "Jogging!";
                     btnJogPlus.Text = "STOP Jog";
-
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Jogging+ START: " + item.ToString());
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -387,6 +434,11 @@ namespace Tritex_ModBus
                     btnJogPlus.BackColor = Color.White;
                     btnJogPlus.Text = "Jog+";
                     lbClientStatus.Text = "Stopped Jog motion!";
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Jogging+ END: " + item.ToString());
+                    }
 
                 }
                 catch (Exception ex)
@@ -411,7 +463,11 @@ namespace Tritex_ModBus
                     btnJogMinus.BackColor = Color.DarkOrange;
                     lbClientStatus.Text = "Jogging!";
                     btnJogMinus.Text = "STOP Jog";
-
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Jogging- START: " + item.ToString());
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -428,6 +484,11 @@ namespace Tritex_ModBus
                     btnJogMinus.BackColor = Color.White;
                     btnJogMinus.Text = "Jog-";
                     lbClientStatus.Text = "Stopped Jog motion!";
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Jogging- END: " + item.ToString());
+                    }
 
                 }
                 catch (Exception ex)
@@ -437,6 +498,7 @@ namespace Tritex_ModBus
                 }
             }
         }
+
 
         //MOVE
         //Move commands uses different channel (4318) and it calls out the mapped movements in the Tritex (Move 0 - 15).
@@ -451,18 +513,22 @@ namespace Tritex_ModBus
 
         //IEG_MOVE_LEVEL = move to Move 2 parameter.
         //Channel 4318, send value 4. 
-        private void btnMove1_Click(object sender, EventArgs e)
+        private void btnMove2_Click(object sender, EventArgs e)
         {
-            if (btnMove1.Text == "Move 2")
+            if (btnMove2.Text == "Move 2")
             {
                 try
                 {
                     modbusTcpClient1.WriteSingleRegister(0x00, 4318, 4);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4318, 4);
                     lbClientStatus.Text = "Wrote succesful to Move2!";
-                    btnMove1.BackColor = Color.DarkOrange;
-                    btnMove1.Text = "STOP Move";
-
+                    btnMove2.BackColor = Color.DarkOrange;
+                    btnMove2.Text = "STOP Move";
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Move1 START: " + item.ToString());
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -470,15 +536,20 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Error when writing! " + ex.ToString();
                 }
             }
-            else if (btnMove1.Text == "STOP Move")
+            else if (btnMove2.Text == "STOP Move")
             {
                 try
                 {
                     modbusTcpClient1.WriteSingleRegister(0x00, 4318, 0);
                     modbusTcpClient2.WriteSingleRegister(0x00, 4318, 0);
                     lbClientStatus.Text = "Wrote the 'stop the move' succesfully";
-                    btnMove1.BackColor = Color.White;
-                    btnMove1.Text = "Move 2";
+                    btnMove2.BackColor = Color.White;
+                    btnMove2.Text = "Move 2";
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Move1 END: " + item.ToString());
+                    }
 
                 }
                 catch (Exception ex)
@@ -558,8 +629,13 @@ namespace Tritex_ModBus
                     btnBreak.Enabled = true;
                     btnPosition.Enabled = true;
 
-                    //Disable IEG_MOTION
-                    btnEnable.Enabled = false;
+                    //Disable Homing and those parameters (since those do not work here)
+                    btnGoHome.Enabled = false;
+                    btnJogMinus.Enabled = false;
+                    btnJogPlus.Enabled = false;
+                    btnMove2.Enabled = false;
+                    btnMove3.Enabled = false;
+
 
                     var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
                     foreach (var item in isHoming)
@@ -589,8 +665,12 @@ namespace Tritex_ModBus
                     btnBreak.Enabled = false;
                     btnPosition.Enabled = false;
 
-                    //Enable IEG_MOTION
-                    btnEnable.Enabled = true;
+                    //Enable Homing etc
+                    btnGoHome.Enabled = true;
+                    btnJogMinus.Enabled = true;
+                    btnJogPlus.Enabled = true;
+                    btnMove2.Enabled = true;
+                    btnMove3.Enabled = true;
 
                     var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
                     foreach (var item in isHoming)
@@ -668,7 +748,11 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Writing Position!";
                     btnPosition.BackColor = Color.DarkOrange;
                     btnPosition.Text = "STOP";
-
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Alt Position START: " + item.ToString());
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -687,6 +771,12 @@ namespace Tritex_ModBus
                     btnPosition.BackColor = Color.White;
                     btnPosition.Text = "Position";
 
+                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
+                    foreach (var item in isHoming)
+                    {
+                        Console.WriteLine("Status Alt Position END: " + item.ToString());
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -696,7 +786,7 @@ namespace Tritex_ModBus
             }
         }
 
-   
+
 
 
 

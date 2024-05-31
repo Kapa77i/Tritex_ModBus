@@ -39,7 +39,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnEnable = new System.Windows.Forms.Button();
-            this.btnMove1 = new System.Windows.Forms.Button();
+            this.btnMove2 = new System.Windows.Forms.Button();
             this.tbM1 = new System.Windows.Forms.TextBox();
             this.tbM2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -52,6 +52,20 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.lbM_Maintained = new System.Windows.Forms.Label();
             this.lbM_Monetary = new System.Windows.Forms.Label();
+            this.lbStatusJogPlus = new System.Windows.Forms.Label();
+            this.lbStatusJogMinus = new System.Windows.Forms.Label();
+            this.lbStatusMove2 = new System.Windows.Forms.Label();
+            this.lbStatusMove3 = new System.Windows.Forms.Label();
+            this.lbStatusHoming = new System.Windows.Forms.Label();
+            this.lbStatusAltMode = new System.Windows.Forms.Label();
+            this.btnStatusMain = new System.Windows.Forms.Button();
+            this.btnStatusMone = new System.Windows.Forms.Button();
+            this.btnStatusJogPlus = new System.Windows.Forms.Button();
+            this.btnStatusJogMinus = new System.Windows.Forms.Button();
+            this.btnStatusMove2 = new System.Windows.Forms.Button();
+            this.btnStatusMove3 = new System.Windows.Forms.Button();
+            this.btnStatusHome = new System.Windows.Forms.Button();
+            this.btnStatusAltMode = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -187,18 +201,18 @@
             this.btnEnable.UseVisualStyleBackColor = false;
             this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
             // 
-            // btnMove1
+            // btnMove2
             // 
-            this.btnMove1.BackColor = System.Drawing.Color.White;
-            this.btnMove1.Enabled = false;
-            this.btnMove1.Location = new System.Drawing.Point(32, 105);
-            this.btnMove1.Margin = new System.Windows.Forms.Padding(4);
-            this.btnMove1.Name = "btnMove1";
-            this.btnMove1.Size = new System.Drawing.Size(131, 60);
-            this.btnMove1.TabIndex = 12;
-            this.btnMove1.Text = "Move 2";
-            this.btnMove1.UseVisualStyleBackColor = false;
-            this.btnMove1.Click += new System.EventHandler(this.btnMove1_Click);
+            this.btnMove2.BackColor = System.Drawing.Color.White;
+            this.btnMove2.Enabled = false;
+            this.btnMove2.Location = new System.Drawing.Point(32, 105);
+            this.btnMove2.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMove2.Name = "btnMove2";
+            this.btnMove2.Size = new System.Drawing.Size(131, 60);
+            this.btnMove2.TabIndex = 12;
+            this.btnMove2.Text = "Move 2";
+            this.btnMove2.UseVisualStyleBackColor = false;
+            this.btnMove2.Click += new System.EventHandler(this.btnMove2_Click);
             // 
             // tbM1
             // 
@@ -223,7 +237,7 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.btnMove3);
-            this.panel3.Controls.Add(this.btnMove1);
+            this.panel3.Controls.Add(this.btnMove2);
             this.panel3.Controls.Add(this.btnJogPlus);
             this.panel3.Controls.Add(this.btnJogMinus);
             this.panel3.Location = new System.Drawing.Point(13, 432);
@@ -319,7 +333,7 @@
             // lbM_Maintained
             // 
             this.lbM_Maintained.AutoSize = true;
-            this.lbM_Maintained.Location = new System.Drawing.Point(657, 89);
+            this.lbM_Maintained.Location = new System.Drawing.Point(597, 72);
             this.lbM_Maintained.Name = "lbM_Maintained";
             this.lbM_Maintained.Size = new System.Drawing.Size(110, 16);
             this.lbM_Maintained.TabIndex = 23;
@@ -328,17 +342,157 @@
             // lbM_Monetary
             // 
             this.lbM_Monetary.AutoSize = true;
-            this.lbM_Monetary.Location = new System.Drawing.Point(793, 89);
+            this.lbM_Monetary.Location = new System.Drawing.Point(598, 104);
             this.lbM_Monetary.Name = "lbM_Monetary";
             this.lbM_Monetary.Size = new System.Drawing.Size(100, 16);
             this.lbM_Monetary.TabIndex = 24;
             this.lbM_Monetary.Text = "Monetary Move";
+            // 
+            // lbStatusJogPlus
+            // 
+            this.lbStatusJogPlus.AutoSize = true;
+            this.lbStatusJogPlus.Location = new System.Drawing.Point(598, 136);
+            this.lbStatusJogPlus.Name = "lbStatusJogPlus";
+            this.lbStatusJogPlus.Size = new System.Drawing.Size(37, 16);
+            this.lbStatusJogPlus.TabIndex = 26;
+            this.lbStatusJogPlus.Text = "Jog+";
+            // 
+            // lbStatusJogMinus
+            // 
+            this.lbStatusJogMinus.AutoSize = true;
+            this.lbStatusJogMinus.Location = new System.Drawing.Point(598, 169);
+            this.lbStatusJogMinus.Name = "lbStatusJogMinus";
+            this.lbStatusJogMinus.Size = new System.Drawing.Size(34, 16);
+            this.lbStatusJogMinus.TabIndex = 27;
+            this.lbStatusJogMinus.Text = "Jog-";
+            // 
+            // lbStatusMove2
+            // 
+            this.lbStatusMove2.AutoSize = true;
+            this.lbStatusMove2.Location = new System.Drawing.Point(598, 206);
+            this.lbStatusMove2.Name = "lbStatusMove2";
+            this.lbStatusMove2.Size = new System.Drawing.Size(51, 16);
+            this.lbStatusMove2.TabIndex = 28;
+            this.lbStatusMove2.Text = "Move 2";
+            // 
+            // lbStatusMove3
+            // 
+            this.lbStatusMove3.AutoSize = true;
+            this.lbStatusMove3.Location = new System.Drawing.Point(598, 244);
+            this.lbStatusMove3.Name = "lbStatusMove3";
+            this.lbStatusMove3.Size = new System.Drawing.Size(51, 16);
+            this.lbStatusMove3.TabIndex = 29;
+            this.lbStatusMove3.Text = "Move 3";
+            // 
+            // lbStatusHoming
+            // 
+            this.lbStatusHoming.AutoSize = true;
+            this.lbStatusHoming.Location = new System.Drawing.Point(598, 282);
+            this.lbStatusHoming.Name = "lbStatusHoming";
+            this.lbStatusHoming.Size = new System.Drawing.Size(44, 16);
+            this.lbStatusHoming.TabIndex = 30;
+            this.lbStatusHoming.Text = "Home";
+            // 
+            // lbStatusAltMode
+            // 
+            this.lbStatusAltMode.AutoSize = true;
+            this.lbStatusAltMode.Location = new System.Drawing.Point(598, 314);
+            this.lbStatusAltMode.Name = "lbStatusAltMode";
+            this.lbStatusAltMode.Size = new System.Drawing.Size(60, 16);
+            this.lbStatusAltMode.TabIndex = 31;
+            this.lbStatusAltMode.Text = "Alt Mode";
+            // 
+            // btnStatusMain
+            // 
+            this.btnStatusMain.BackColor = System.Drawing.SystemColors.Window;
+            this.btnStatusMain.Location = new System.Drawing.Point(745, 72);
+            this.btnStatusMain.Name = "btnStatusMain";
+            this.btnStatusMain.Size = new System.Drawing.Size(18, 16);
+            this.btnStatusMain.TabIndex = 32;
+            this.btnStatusMain.UseVisualStyleBackColor = false;
+            // 
+            // btnStatusMone
+            // 
+            this.btnStatusMone.BackColor = System.Drawing.SystemColors.Window;
+            this.btnStatusMone.Location = new System.Drawing.Point(745, 104);
+            this.btnStatusMone.Name = "btnStatusMone";
+            this.btnStatusMone.Size = new System.Drawing.Size(18, 16);
+            this.btnStatusMone.TabIndex = 33;
+            this.btnStatusMone.UseVisualStyleBackColor = false;
+            // 
+            // btnStatusJogPlus
+            // 
+            this.btnStatusJogPlus.BackColor = System.Drawing.SystemColors.Window;
+            this.btnStatusJogPlus.Location = new System.Drawing.Point(745, 136);
+            this.btnStatusJogPlus.Name = "btnStatusJogPlus";
+            this.btnStatusJogPlus.Size = new System.Drawing.Size(18, 15);
+            this.btnStatusJogPlus.TabIndex = 34;
+            this.btnStatusJogPlus.UseVisualStyleBackColor = false;
+            // 
+            // btnStatusJogMinus
+            // 
+            this.btnStatusJogMinus.BackColor = System.Drawing.SystemColors.Window;
+            this.btnStatusJogMinus.Location = new System.Drawing.Point(745, 170);
+            this.btnStatusJogMinus.Name = "btnStatusJogMinus";
+            this.btnStatusJogMinus.Size = new System.Drawing.Size(18, 15);
+            this.btnStatusJogMinus.TabIndex = 35;
+            this.btnStatusJogMinus.UseVisualStyleBackColor = false;
+            // 
+            // btnStatusMove2
+            // 
+            this.btnStatusMove2.BackColor = System.Drawing.SystemColors.Window;
+            this.btnStatusMove2.Location = new System.Drawing.Point(745, 206);
+            this.btnStatusMove2.Name = "btnStatusMove2";
+            this.btnStatusMove2.Size = new System.Drawing.Size(18, 15);
+            this.btnStatusMove2.TabIndex = 36;
+            this.btnStatusMove2.UseVisualStyleBackColor = false;
+            // 
+            // btnStatusMove3
+            // 
+            this.btnStatusMove3.BackColor = System.Drawing.SystemColors.Window;
+            this.btnStatusMove3.Location = new System.Drawing.Point(745, 244);
+            this.btnStatusMove3.Name = "btnStatusMove3";
+            this.btnStatusMove3.Size = new System.Drawing.Size(18, 15);
+            this.btnStatusMove3.TabIndex = 37;
+            this.btnStatusMove3.UseVisualStyleBackColor = false;
+            // 
+            // btnStatusHome
+            // 
+            this.btnStatusHome.BackColor = System.Drawing.SystemColors.Window;
+            this.btnStatusHome.Location = new System.Drawing.Point(745, 282);
+            this.btnStatusHome.Name = "btnStatusHome";
+            this.btnStatusHome.Size = new System.Drawing.Size(18, 15);
+            this.btnStatusHome.TabIndex = 38;
+            this.btnStatusHome.UseVisualStyleBackColor = false;
+            // 
+            // btnStatusAltMode
+            // 
+            this.btnStatusAltMode.BackColor = System.Drawing.SystemColors.Window;
+            this.btnStatusAltMode.Location = new System.Drawing.Point(745, 314);
+            this.btnStatusAltMode.Name = "btnStatusAltMode";
+            this.btnStatusAltMode.Size = new System.Drawing.Size(18, 15);
+            this.btnStatusAltMode.TabIndex = 39;
+            this.btnStatusAltMode.UseVisualStyleBackColor = false;
             // 
             // Modbus_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1303, 746);
+            this.Controls.Add(this.btnStatusAltMode);
+            this.Controls.Add(this.btnStatusHome);
+            this.Controls.Add(this.btnStatusMove3);
+            this.Controls.Add(this.btnStatusMove2);
+            this.Controls.Add(this.btnStatusJogMinus);
+            this.Controls.Add(this.btnStatusJogPlus);
+            this.Controls.Add(this.btnStatusMone);
+            this.Controls.Add(this.btnStatusMain);
+            this.Controls.Add(this.lbStatusAltMode);
+            this.Controls.Add(this.lbStatusHoming);
+            this.Controls.Add(this.lbStatusMove3);
+            this.Controls.Add(this.lbStatusMove2);
+            this.Controls.Add(this.lbStatusJogMinus);
+            this.Controls.Add(this.lbStatusJogPlus);
             this.Controls.Add(this.lbM_Monetary);
             this.Controls.Add(this.lbM_Maintained);
             this.Controls.Add(this.panel3);
@@ -381,7 +535,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.TextBox tbM1;
         private System.Windows.Forms.TextBox tbM2;
-        private System.Windows.Forms.Button btnMove1;
+        private System.Windows.Forms.Button btnMove2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnPosition;
@@ -392,5 +546,19 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lbM_Maintained;
         private System.Windows.Forms.Label lbM_Monetary;
+        private System.Windows.Forms.Label lbStatusJogPlus;
+        private System.Windows.Forms.Label lbStatusJogMinus;
+        private System.Windows.Forms.Label lbStatusMove2;
+        private System.Windows.Forms.Label lbStatusMove3;
+        private System.Windows.Forms.Label lbStatusHoming;
+        private System.Windows.Forms.Label lbStatusAltMode;
+        private System.Windows.Forms.Button btnStatusMain;
+        private System.Windows.Forms.Button btnStatusMone;
+        private System.Windows.Forms.Button btnStatusJogPlus;
+        private System.Windows.Forms.Button btnStatusJogMinus;
+        private System.Windows.Forms.Button btnStatusMove2;
+        private System.Windows.Forms.Button btnStatusMove3;
+        private System.Windows.Forms.Button btnStatusHome;
+        private System.Windows.Forms.Button btnStatusAltMode;
     }
 }
