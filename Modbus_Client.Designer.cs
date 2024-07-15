@@ -217,20 +217,20 @@
             // tbM1
             // 
             this.tbM1.Enabled = false;
-            this.tbM1.Location = new System.Drawing.Point(172, 29);
+            this.tbM1.Location = new System.Drawing.Point(172, 30);
             this.tbM1.Margin = new System.Windows.Forms.Padding(4);
             this.tbM1.Name = "tbM1";
-            this.tbM1.Size = new System.Drawing.Size(92, 22);
+            this.tbM1.Size = new System.Drawing.Size(113, 22);
             this.tbM1.TabIndex = 17;
             this.tbM1.Text = "192.168.0.211";
             // 
             // tbM2
             // 
             this.tbM2.Enabled = false;
-            this.tbM2.Location = new System.Drawing.Point(277, 29);
+            this.tbM2.Location = new System.Drawing.Point(293, 30);
             this.tbM2.Margin = new System.Windows.Forms.Padding(4);
             this.tbM2.Name = "tbM2";
-            this.tbM2.Size = new System.Drawing.Size(90, 22);
+            this.tbM2.Size = new System.Drawing.Size(112, 22);
             this.tbM2.TabIndex = 18;
             this.tbM2.Text = "192.168.0.212";
             // 
