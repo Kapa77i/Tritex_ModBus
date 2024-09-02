@@ -20,12 +20,8 @@ namespace Tritex_ModBus
 {
     public partial class Modbus_Client : Form
     {
-        //EasyModbus.ModbusClient modbusClient;
-        ModbusTcpClient modbusTcpClient;
         ModbusTcpClient modbusTcpClient1;
         ModbusTcpClient modbusTcpClient2;
-
-        ModbusTcpServer modbusTcpServer;
 
         public Modbus_Client()
         {
@@ -42,12 +38,8 @@ namespace Tritex_ModBus
             {
                 try
                 {
-                    //Changed this from BigEndian to Little (CHECK THIS IF THERE IS ANY ISSUES!!)
                     modbusTcpClient1.Connect(IPAddress.Parse(tbM1.Text), ModbusEndianness.BigEndian);
                     modbusTcpClient2.Connect(IPAddress.Parse(tbM2.Text), ModbusEndianness.BigEndian);
-
-                   //var data = modbusTcpClient1.ReadHoldingRegisters<float>(0x00, 4317, 15);
-                    //modbusTcpClient1.ReadInputRegisters(0x00, 4316, 15);
 
 
                     Console.WriteLine("Both engines connected");
@@ -59,20 +51,7 @@ namespace Tritex_ModBus
                     btnEnable.Enabled = true;
                     btnIEG_MOD.Enabled = true;
                     btnAlt.Enabled = true;
-                    //btnGoHome.Enabled = true;
-
-                    //do
-                    //{
-                    //    var isHoming = modbusTcpClient2.ReadInputRegisters<Int32>(0x00, 111, 15).ToArray();
-
-                    //    if (isHoming[6] == 130)
-                    //    {
-                    //        Console.WriteLine("Alt: " + isHoming[6].ToString());
-                    //        btnStatusAltMode.BackColor = Color.Red;
-                    //    }
-
-                    //} while (btnConnect.Text != "Connect");
-
+             
                 }
                 catch (Exception ex)
                 {
@@ -159,17 +138,8 @@ namespace Tritex_ModBus
                     btnMove3.Enabled = true;
 
                     //Disable Alt mode & Momentary mode?
-                   // btnAlt.Enabled = false;
                     btnIEG_MOD.Enabled = false;
 
-                    //var isEnabled = modbusTcpClient1.ReadInputRegisters(0x00, 104, 0);
-
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int32>(0x00, 111, 15).ToArray();
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status START OEG: " + item.ToString());
-                    }
-                        
                 }
                 catch (Exception ex)
                 {
@@ -203,14 +173,7 @@ namespace Tritex_ModBus
                     btnMove3.Enabled = false;
 
                     //Able Alt mode
-                   // btnAlt.Enabled = true;
                     btnIEG_MOD.Enabled = true;
-
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int32>(0x00, 111, 15);
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status END OEG: " + item.ToString());
-                    }
 
                 }
 
@@ -245,16 +208,10 @@ namespace Tritex_ModBus
                     btnGoHome.Enabled = true;
                     btnMove2.Enabled = true;
                     btnMove3.Enabled = true;
-                   // btnAlt.Enabled = true;
 
                     //Disable
                     btnEnable.Enabled = false;
 
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status IEG_MOD START OEG: " + item.ToString());
-                    }
 
                 }
                 catch (Exception ex)
@@ -287,17 +244,9 @@ namespace Tritex_ModBus
                     btnGoHome.Enabled = false;
                     btnMove2.Enabled = false;
                     btnMove3.Enabled = false;
-                   // btnAlt.Enabled = false;
 
                     //Able
                     btnEnable.Enabled = true;
-
-
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status IEG_MOD END OEG: " + item.ToString());
-                    }
 
                 }
 
@@ -382,11 +331,6 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Write succesful!";
                     btnGoHome.Text = "Go Home";
                     btnGoHome.BackColor = Color.White;
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status Homing END: " + item.ToString());
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -412,11 +356,6 @@ namespace Tritex_ModBus
                     btnJogPlus.BackColor = Color.DarkOrange;
                     lbClientStatus.Text = "Jogging!";
                     btnJogPlus.Text = "STOP Jog";
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status Jogging+ START: " + item.ToString());
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -463,11 +402,6 @@ namespace Tritex_ModBus
                     btnJogMinus.BackColor = Color.DarkOrange;
                     lbClientStatus.Text = "Jogging!";
                     btnJogMinus.Text = "STOP Jog";
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status Jogging- START: " + item.ToString());
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -524,11 +458,6 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Wrote succesful to Move2!";
                     btnMove2.BackColor = Color.DarkOrange;
                     btnMove2.Text = "STOP Move";
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status Move1 START: " + item.ToString());
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -748,11 +677,6 @@ namespace Tritex_ModBus
                     lbClientStatus.Text = "Writing Position!";
                     btnPosition.BackColor = Color.DarkOrange;
                     btnPosition.Text = "STOP";
-                    var isHoming = modbusTcpClient2.ReadInputRegisters<Int16>(0x00, 104, 15);
-                    foreach (var item in isHoming)
-                    {
-                        Console.WriteLine("Status Alt Position START: " + item.ToString());
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -785,42 +709,6 @@ namespace Tritex_ModBus
                 }
             }
         }
-
-
-
-
-
-        //REad register code, needs to add the handler if used.
-        //private void btnReadRegister_Click(object sender, EventArgs e)
-        //{
-        //    var uniqIdent = 0x00;
-        //    var startingAddress = int.Parse(tbRegisterVal.Text);
-        //    //var registers = ModbusTcpServer.GetHoldingRegisters();
-        //    //registers.SetBigEndian<int>(address: 1, value: 99);
-        //    //Console.WriteLine(registers.ToString());
-        //    //Span<short> registers.GetBigEndian<T>();
-
-        //    try
-        //    {
-        //        var shortDataResult = modbusTcpClient.ReadHoldingRegisters<short>(uniqIdent, startingAddress, 2);
-
-        //        Console.WriteLine("Haettu tulos: ");
-        //        foreach (var item in shortDataResult) { 
-
-        //            Console.WriteLine(item.ToString());
-
-        //        }
-        //        //Console.WriteLine(shortDataResult[0]);
-
-        //        lbClientStatus.Text = "Read succesful!";
-        //        tbShowRegVal.Text = shortDataResult[0].ToString();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        lbClientStatus.Text = "Error when writing! " + ex.ToString();
-        //    }
-
-        //}
 
     }
 }
