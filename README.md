@@ -33,3 +33,10 @@ To run this prototype code successfully, you also need to:
 - Click Connect
   -> Status message should show you if it is connected or not and the buttons will became abled once the connection is established.
 
+
+**Trouble shooting**
+
+If not connected check:
+- Firewall settings (port 502 needs to be open)
+- is the cable fully in place
+- can you ping any of the motors from your laptop? (_**win+R,**_ type _**cmd**_, then _**ping** _+ the IP address of the motor)
